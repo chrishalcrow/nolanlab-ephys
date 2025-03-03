@@ -91,7 +91,7 @@ def get_recording_from(recording_folder):
             recording_folder = Path(recording_folder) / Path('recording.zarr')
         recording = si.load_extractor(recording_folder)
     else:
-        recording = si.read_openephys(recording_folder)
+        recording = si.read_openephys(recording_folder / Path('Record Node 109'))
 
     return recording
 
@@ -100,7 +100,7 @@ def get_recordings_from(recording_folders):
     
     recordings = []
     for recording_folder in recording_folders:
-        recordings.append(get_recordings_from(recording_folder))
+        recordings.append(get_recording_from(recording_folder))
 
     return recordings
 
