@@ -3,10 +3,10 @@ import numpy.random as random
 import pandas as pd
 import subprocess
 
-def make_and_run_script(active_projects_path, recording_paths, destination_folder):
+def make_and_run_script(active_projects_path, recording_paths, destination_folder, script_name, wait_for=None):
 
-    script_text = """# Grid Engine options start with a #$
-#$ -N stagein
+    script_text = f"""# Grid Engine options start with a #$
+#$ -N {script_name}{wait_for}
 #$ -cwd
 #$ -q staging
 
@@ -26,10 +26,10 @@ def make_and_run_script(active_projects_path, recording_paths, destination_folde
     subprocess.run(['qsub', filename])
 
 
-def make_and_run_stageout(source_folder, active_projects_path, destination_folder):
+def make_and_run_stageout(source_folder, active_projects_path, destination_folder, wait_for=None):
 
-    script_text = """# Grid Engine options start with a #$
-#$ -N stageout
+    script_text = f"""# Grid Engine options start with a #$
+#$ -N stageout{wait_for}
 #$ -cwd
 #$ -q staging
 
@@ -59,11 +59,11 @@ def filepath_from_mouse_day_sessions(mouse, day, sessions, path_to_all_filepaths
 
 
 
-def make_and_run_locations_script(mouse, day):
+def make_and_run_locations_script(mouse, day, wait_for=None):
 
     script_text = f"""# Grid Engine options start with a #$
 #$ -N M{mouse}D{day}loc
-#$ -pe sharedmem 4 -l rl9=true,h_vmem=30G,h_rt=2:00:00
+#$ -pe sharedmem 4 -l rl9=true,h_vmem=30G,h_rt=2:00:00{wait_for}
 #$ -cwd
 
 source /etc/profile.d/modules.sh

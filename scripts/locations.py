@@ -17,7 +17,6 @@ mouse = int(parser.parse_args().mouse)
 day = int(parser.parse_args().day)
 sessions_string = parser.parse_args().sessions
 sessions = sessions_string.split(',')
-destination = parser.parse_args().destination
 
 recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions)
 

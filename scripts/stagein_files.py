@@ -1,5 +1,6 @@
 from nolanlab_ephys.eddie import filepath_from_mouse_day_sessions, make_and_run_script
 from argparse import ArgumentParser
+from nolanlab_ephys.common_paths import eddie_active_projects
 
 parser = ArgumentParser()
 
@@ -16,6 +17,10 @@ destination = parser.parse_args().destination
 
 recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions)
 
-active_projects_path = "/run/user/1000/gvfs/smb-share:server=cmvm.datastore.ed.ac.uk,share=cmvm/sbms/groups/CDBS_SIDB_storage/NolanLab/ActiveProjects/"
+active_projects_path = eddie_active_projects
 
-make_and_run_script(active_projects_path, recording_paths, destination)
+stagein_script_name = f"M{mouse}D{day}_in"
+script_name = make_and_run_script(active_projects_path, recording_paths, destination, stagein_script_name)
+
+
+
