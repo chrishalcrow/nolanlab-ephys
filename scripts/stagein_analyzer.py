@@ -17,7 +17,7 @@ sa_path = [f"Chris/Cohort12/derivatives/M{mouse}/D{day}/full/kilosort4/kilosort4
 
 active_projects_path = chris_linux_active_projects
 
-destination = Path(derivatives / f"M{mouse}/D{day}/full/kilosort4/kilosort4_sa")
+destination = Path(derivatives) / f"M{mouse}/D{day}/full/kilosort4/kilosort4_sa"
 destination.mkdir(exist_ok=True, parents=True)
 
 make_and_run_script(active_projects_path, sa_path, destination)
