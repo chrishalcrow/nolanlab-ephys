@@ -3,8 +3,19 @@ name = "nolanlab_ephys"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
 dependencies = [
+    "herdingspikes>=0.4.6",
+    "ipykernel>=6.29.5",
+    "llvmlite>=0.44.0",
+    "matplotlib>=3.10.3",
+    "numba>=0.61.0",
     "numpy",
-    "spikeinterface",
+    "pandas>=2.2.3",
+    "scipy>=1.15.2",
+    "spikeinterface@git+https://github.com/SpikeInterface/spikeinterface.git",
 ]
+
+
+[build-system]
+requires = ["setuptools>=78.0.2"]
+build-backend = "setuptools.build_meta"
