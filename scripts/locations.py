@@ -9,6 +9,10 @@ parser.add_argument('mouse')
 parser.add_argument('day')
 parser.add_argument('sessions')
 
+mouse = int(parser.parse_args().mouse)
+day = int(parser.parse_args().day)
+sessions_string = parser.parse_args().sessions
+sessions = sessions_string.split(',')
 
 data_folder = Path("/exports/eddie/scratch/chalcrow/harry/data/")
 deriv_folder = Path("/exports/eddie/scratch/chalcrow/harry/derivatives/")
@@ -21,11 +25,6 @@ sa_path = [f"Chris/Cohort12/derivatives/M{mouse}/D{day}/full/kilosort4/kilosort4
 
 destination = Path(deriv_folder) / f"M{mouse}/D{day}/full/kilosort4"
 destination.mkdir(exist_ok=True, parents=True)
-
-mouse = int(parser.parse_args().mouse)
-day = int(parser.parse_args().day)
-sessions_string = parser.parse_args().sessions
-sessions = sessions_string.split(',')
 
 recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions)
 
