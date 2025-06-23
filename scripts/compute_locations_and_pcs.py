@@ -1,6 +1,6 @@
 import spikeinterface.full as si
 
-from nolanlab_ephys.utils import chronologize_paths, get_recording_folders, get_session_names
+from nolanlab_ephys.utils import get_chrono_concat_recording
 from pathlib import Path
 
 active_projects_folder = Path("/run/user/1000/gvfs/smb-share:server=cmvm.datastore.ed.ac.uk,share=cmvm/sbms/groups/CDBS_SIDB_storage/NolanLab/ActiveProjects/")
@@ -30,9 +30,7 @@ for mouse, days in ephys_days.items():
             print(f"skipped M{mouse}_D{day}.")
             continue
 
-        recording_folders = chronologize_paths(get_recording_folders(data_folder=data_folder, mouse =mouse, day=day))
-        recordings = [si.read_openephys(recording_folder) for recording_folder in recording_folders]
-        recording = si.concatenate_recordings(recordings)
+        recording = get_chrono_concat_recording(data_folder=data_folder, mouse =mouse, day=day)
         pp_rec = si.common_reference(si.bandpass_filter(recording))
 
         if analyzer.get_num_channels() <= 384:
