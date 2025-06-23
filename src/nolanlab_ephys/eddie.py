@@ -39,17 +39,14 @@ def make_and_run_locations_script(mouse, day):
 
     script_text = f"""# Grid Engine options start with a #$
 #$ -N M{mouse}D{day}loc
-#$ -pe sharedmem 4 -l rl9=true,h_vmem=30G,h_rt=48:00:00
+#$ -pe sharedmem 4 -l rl9=true,h_vmem=30G,h_rt=2:00:00
 #$ -cwd
-
-# Hard runtime limit
-#$ -l h_rt=02:00:00 
 
 source /etc/profile.d/modules.sh
 
 cd /exports/eddie/scratch/chalcrow/harry/fromgit/nolanlab-ephys
 
-uv run scripts/compute_locations_and_pcs.py {mouse} {day}
+/home/chalcrow/.local/bin/uv run scripts/compute_locations_and_pcs.py {mouse} {day}
 """
 
     filename = f'locations_{mouse}_{day}.sh'
