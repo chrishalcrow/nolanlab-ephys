@@ -1,11 +1,12 @@
 from datetime import datetime
 import numpy.random as random
 import pandas as pd
+import subprocess
 
 def make_and_run_script(active_projects_path, recording_paths, destination_folder):
 
     script_text = """# Grid Engine options start with a #$
-#$ -N stageout
+#$ -N stagein
 #$ -cwd
 #$ -q staging
 
@@ -22,9 +23,7 @@ def make_and_run_script(active_projects_path, recording_paths, destination_folde
     with open(filename, "w") as f:
         f.write(script_text)
 
-    
-
-
+    subprocess.run(['qsub', filename])
 
 def filepath_from_mouse_day_sessions(mouse, day, sessions, path_to_all_filepaths="all_filepaths.csv"):
 
