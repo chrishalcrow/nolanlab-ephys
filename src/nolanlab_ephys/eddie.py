@@ -38,7 +38,7 @@ def filepath_from_mouse_day_sessions(mouse, day, sessions, path_to_all_filepaths
 def make_and_run_locations_script(mouse, day):
 
     script_text = f"""# Grid Engine options start with a #$
-#$ -N {mouse}_{day}_loc
+#$ -N M{mouse}D{day}loc
 #$ -pe sharedmem 4 -l rl9=true,h_vmem=30G,h_rt=48:00:00
 #$ -cwd
 
