@@ -16,7 +16,7 @@ def make_and_run_script(active_projects_path, recording_paths, destination_folde
 """
 
     for recording_path in recording_paths:
-        script_text += f"cp -rn {active_projects_path + recording_path} {destination_folder}\n"
+        script_text += f"cp -rn {active_projects_path / recording_path} {destination_folder}\n"
 
     filename = 'stagein_{date:%Y-%m-%d_%H:%M:%S}_{rando}.sh'.format( date=datetime.now(), rando= random.randint(100))  
 
