@@ -13,9 +13,10 @@ mouse = int(parser.parse_args().mouse)
 day = int(parser.parse_args().day)
 derivatives = parser.parse_args().derivatives
 
-extensions_path = Path(f"Chris/Cohort12/derivatives/M{mouse}/D{day}/full/kilosort4/kilosort4_sa/extensions/")
+DS_extensions_path = Path(f"Chris/Cohort12/derivatives/M{mouse}/D{day}/full/kilosort4/kilosort4_sa/extensions/")
+extensions_path = Path(f"M{mouse}/D{day}/full/kilosort4/kilosort4_sa/extensions/")
 locations_path = extensions_path / "spike_locations"
 
 active_projects_path = eddie_active_projects
 
-make_and_run_stageout(Path(derivatives) / locations_path, active_projects_path, extensions_path)
+make_and_run_stageout(Path(derivatives) / locations_path, active_projects_path, DS_extensions_path)
