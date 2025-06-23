@@ -5,6 +5,9 @@ import subprocess
 
 def make_and_run_script(active_projects_path, recording_paths, destination_folder, script_name, wait_for=None):
 
+    if wait_for is None:
+        wait_for = ""
+
     script_text = f"""# Grid Engine options start with a #$
 #$ -N {script_name}{wait_for}
 #$ -cwd
@@ -27,6 +30,9 @@ def make_and_run_script(active_projects_path, recording_paths, destination_folde
 
 
 def make_and_run_stageout(source_folder, active_projects_path, destination_folder, wait_for=None):
+
+    if wait_for is None:
+        wait_for = ""
 
     script_text = f"""# Grid Engine options start with a #$
 #$ -N stageout{wait_for}
@@ -60,6 +66,9 @@ def filepath_from_mouse_day_sessions(mouse, day, sessions, path_to_all_filepaths
 
 
 def make_and_run_locations_script(mouse, day, wait_for=None):
+
+    if wait_for is None:
+        wait_for = ""
 
     script_text = f"""# Grid Engine options start with a #$
 #$ -N M{mouse}D{day}loc
