@@ -45,6 +45,8 @@ def make_and_run_locations_script(mouse, day):
 # Hard runtime limit
 #$ -l h_rt=02:00:00 
 
+source /etc/profile.d/modules.sh
+
 cd /exports/eddie/scratch/chalcrow/harry/fromgit/nolanlab-ephys
 
 uv run scripts/compute_locations_and_pcs.py {mouse} {day}
