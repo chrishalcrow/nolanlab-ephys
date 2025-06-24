@@ -11,7 +11,7 @@ parser.add_argument('sessions')
 
 mouse = int(parser.parse_args().mouse)
 
-days_string = parser.parse_args().day
+days_string = parser.parse_args().days
 days_list_string = days_string.split(',')
 days = [int(day) for day in days_list_string]
 
