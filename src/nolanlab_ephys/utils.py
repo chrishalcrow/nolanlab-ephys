@@ -7,7 +7,11 @@ import spikeinterface.full as si
 def get_chrono_concat_recording(data_folder, mouse, day):
 
     recording_folders = chronologize_paths(get_recording_folders(data_folder=data_folder, mouse =mouse, day=day))
-    recordings = [si.read_openephys(recording_folder) for recording_folder in recording_folders]
+    if 'zarr' in recording_folders[0]:
+        recordings = [si.read_zarr(recording_folder / 'recording.zarr') for recording_folder in recording_folders]
+    else:
+        recordings = [si.read_openephys(recording_folder) for recording_folder in recording_folders]
+
     recording = si.concatenate_recordings(recordings)
 
     return recording

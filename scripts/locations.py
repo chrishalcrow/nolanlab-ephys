@@ -20,6 +20,7 @@ sessions = sessions_string.split(',')
 
 data_folder = Path("/exports/eddie/scratch/chalcrow/harry/data/")
 deriv_folder = Path("/exports/eddie/scratch/chalcrow/harry/derivatives/")
+active_projects_path = eddie_active_projects
 
 for day in days:
 
@@ -33,8 +34,6 @@ for day in days:
     destination.mkdir(exist_ok=True, parents=True)
 
     recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions)
-
-    active_projects_path = eddie_active_projects
 
     stagein_script_name = f"M{mouse}D{day}_in"
     stagein_sa_script_name = f"M{mouse}D{day}_sain"
