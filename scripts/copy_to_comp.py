@@ -1,6 +1,6 @@
 from nolanlab_ephys.eddie import filepath_from_mouse_day_sessions
 from argparse import ArgumentParser
-from nolanlab_ephys.common_paths import chris_linux_active_projects
+from nolanlab_ephys.common_paths import chris_linux_active_projects, eddie_active_projects
 from pathlib import Path
 from subprocess import run
 
@@ -22,7 +22,7 @@ if destination is None:
 
 recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions)
 
-active_projects_path = chris_linux_active_projects
+active_projects_path = eddie_active_projects
 
 for recording_path in recording_paths:
-    run(["cp", "-r", "--update=none", f"{active_projects_path / recording_path}", f"{destination}"])
+    run(["cp", "-r", f"{active_projects_path / recording_path}", f"{destination}"])
