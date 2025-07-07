@@ -4,11 +4,11 @@ from pathlib import Path
 import numpy as np
 import spikeinterface.full as si
 
-def get_chrono_concat_recording(data_folder, mouse, day):
+def get_chrono_concat_recording(data_folder, mouse, day, sessions=None):
 
-    recording_folders = chronologize_paths(get_recording_folders(data_folder=data_folder, mouse =mouse, day=day))
-    if 'zarr' in recording_folders[0]:
-        recordings = [si.read_zarr(recording_folder / 'recording.zarr') for recording_folder in recording_folders]
+    recording_folders = chronologize_paths(get_recording_folders(data_folder=data_folder, mouse =mouse, day=day, sessions=sessions))
+    if mouse in (20,21):
+        recordings = [si.read_zarr(Path(recording_folder) / 'recording.zarr') for recording_folder in recording_folders]
     else:
         recordings = [si.read_openephys(recording_folder) for recording_folder in recording_folders]
 
@@ -16,7 +16,7 @@ def get_chrono_concat_recording(data_folder, mouse, day):
 
     return recording
 
-def get_recording_folders(data_folder, mouse, day):
+def get_recording_folders(data_folder, mouse, day, sessions=None):
     """
 
     This function expects raw data to be in the format:
@@ -48,10 +48,11 @@ def get_recording_folders(data_folder, mouse, day):
     # if len(list(Path(data_folder).glob('data/')))>0:
     #     data_path += 'data/'
 
-    session_types = ['of', 'vr', 'vr_multi_context', 'allen_brain_observatory_visual_sequences', 'allen_brain_observatory_visual_multi_sequences', 'allen_brain_observatory_visual_coding', 'dvd_waitscreen']
+    if sessions is None:
+        sessions = ['of', 'vr', 'vr_multi_context', 'allen_brain_observatory_visual_sequences', 'allen_brain_observatory_visual_multi_sequences', 'allen_brain_observatory_visual_coding', 'dvd_waitscreen']
 
     recording_folders = list(Path(data_path).glob(f"M{mouse}_D{day}_*"))
-    for session_type in session_types:
+    for session_type in sessions:
         recording_folders += list(Path(data_path).glob(f"{session_type}/M{mouse}_D{day}_*"))
 
     for a, recording_folder in enumerate(recording_folders):
