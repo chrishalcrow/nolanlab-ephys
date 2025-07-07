@@ -28,11 +28,13 @@ def main():
 
     data_folder = parser.parse_args().data_folder
     if data_folder is None:
-        data_folder = Path("/home/nolanlab/Work/Harry_Project/data/")
+        data_folder = "/home/nolanlab/Work/Harry_Project/data/"
+    data_folder = Path(data_folder)
 
     deriv_folder = parser.parse_args().data_folder
     if deriv_folder is None:
-        deriv_folder = Path("/home/nolanlab/Work/Harry_Project/derivatives/")
+        deriv_folder = "/home/nolanlab/Work/Harry_Project/derivatives/"
+    deriv_folder = Path(deriv_folder)
 
     si.set_global_job_kwargs(n_jobs=10)
 

@@ -5,4 +5,4 @@ parser = ArgumentParser()
 parser.add_argument('python_arg')
 python_arg = parser.parse_args().python_arg
 
-run_python_script(python_arg, "chalcrow", cores=8, email="chalcrow@ed.ac.uk", staging=False)
+run_python_script(python_arg, cores=8, email="chalcrow@ed.ac.uk", staging=False)
