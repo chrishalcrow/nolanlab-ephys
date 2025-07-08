@@ -38,9 +38,15 @@ stagein_dict = {}
 for recording_path in recording_paths:
     stagein_dict[f"{active_projects_path / recording_path}"] = data_folder
 
+stageout_dict = {}
+stageout_dict[deriv_folder / f"M{mouse}/D{day}/{''.join(sessions)}/{protocol}/"] = eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/{''.join(sessions)}/{protocol}/"
+
 stagein_job_name = f"M{mouse}D{day}in" 
+run_python_name = f"M{mouse}D{day}run"
+stageout_job_name = f"M{mouse}D{day}out" 
 
 python_arg = f"$HOME/.local/bin/uv run /exports/eddie/scratch/chalcrow/harry/fromgit/nolanlab-ephys/scripts/sort_on_comp.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
 
 run_stage_script(stagein_dict, job_name=stagein_job_name)
-run_python_script(python_arg, cores=8, email="chalcrow@ed.ac.uk", staging=False, hold_jid=stagein_job_name)
+run_python_script(python_arg, cores=8, email="chalcrow@ed.ac.uk", staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
+run_stage_script(stageout_dict, job_name=stageout_job_name, hold_jid=run_python_name)
