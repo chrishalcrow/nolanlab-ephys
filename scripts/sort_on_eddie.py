@@ -39,7 +39,7 @@ for recording_path in recording_paths:
     stagein_dict[f"{active_projects_path / recording_path}"] = data_folder
 
 stageout_dict = {}
-stageout_dict[deriv_folder / f"M{mouse}/D{day}/{''.join(sessions)}/{protocol}/"] = eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/{''.join(sessions)}/{protocol}/"
+stageout_dict[deriv_folder / f"M{mouse}/D{day}/{''.join(sessions)}/"] = eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/"
 
 stagein_job_name = f"M{mouse}D{day}in" 
 run_python_name = f"M{mouse}D{day}run"
