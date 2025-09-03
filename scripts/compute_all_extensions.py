@@ -36,7 +36,7 @@ all_extensions = deepcopy(new_analyzer.extensions)
 for extension_name in all_extensions:
    new_analyzer.delete_extension(extension_name)
 
-new_sparsity = si.estimate_sparsity(new_analyzer.sorting, new_analyzer._recording, peak_sign="both", radius_um=58)
+new_sparsity = si.estimate_sparsity(new_analyzer.sorting, new_analyzer._recording, peak_sign="both", radius_um=70)
 new_analyzer.sparsity = new_sparsity
 
 new_analyzer.compute({
