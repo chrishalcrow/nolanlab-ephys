@@ -12,9 +12,11 @@ def get_chrono_concat_recording(data_folder, mouse, day, sessions=None):
 
     session_names = get_session_names(mouseday_recording_folders)
 
-    included_sessions = [session_name in sessions for session_name in session_names]
-
-    recording_folders = np.array(mouseday_recording_folders)[np.array(included_sessions)]
+    if sessions is not None:
+        included_sessions = [session_name in sessions for session_name in session_names]
+        recording_folders = np.array(mouseday_recording_folders)[np.array(included_sessions)]
+    else:
+        recording_folders = np.array(mouseday_recording_folders)
     
     if mouse in (20,21):
         recordings = [si.read_zarr(Path(recording_folder) / 'recording.zarr') for recording_folder in recording_folders]
