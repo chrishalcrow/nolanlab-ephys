@@ -24,7 +24,7 @@ if deriv_folder is None:
     deriv_folder = eddie_deriv_folder
 deriv_folder = Path(deriv_folder)
 
-recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions)
+recording_paths = filepath_from_mouse_day_sessions(mouse, day)
 active_projects_path = eddie_active_projects
 
 stagein_dict = {}
