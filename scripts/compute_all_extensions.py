@@ -16,7 +16,7 @@ parser.add_argument('day')
 mouse = int(parser.parse_args().mouse)
 day = int(parser.parse_args().day)
 
-si.set_global_job_kwargs(n_jobs=4)
+si.set_global_job_kwargs(n_jobs=8)
 
 analyzer_path = deriv_folder / f"M{mouse}/D{day}/full/kilosort4/kilosort4_sa"
 analyzer = si.load_sorting_analyzer(analyzer_path)
@@ -34,6 +34,28 @@ if analyzer.get_num_channels() <= 384:
 else:
     analyzer._recording = pp_rec
 
-analyzer.compute("spike_locations")
+from copy import deepcopy
+new_analyzer = analyzer.save_as(format="memory")
+all_extensions = deepcopy(new_analyzer.extensions)
+for extension_name in all_extensions:
+   new_analyzer.delete_extension(extension_name)
 
-print(f"Finished M{mouse}_D{day}.")
+new_sparsity = si.estimate_sparsity(new_analyzer.sorting, new_analyzer._recording, peak_sign="both", radius_um=58)
+new_analyzer.sparsity = new_sparsity
+
+new_analyzer.compute({
+    'unit_locations': {},
+    'random_spikes': {},
+    'noise_levels': {},
+    'waveforms': {},
+    'templates': {},
+    'spike_amplitudes': {},
+    'isi_histograms': {},
+    'spike_locations': {},
+    'correlograms': {},
+    'quality_metrics': {},
+    'template_metrics': {'include_multi_channel_metrics': True},
+})
+
+new_analyzer_path = deriv_folder / f"M{mouse}/D{day}/full/kilosort4/sub-{mouse}_ses-{day}_full_analyzer"
+new_analyzer.save_as(folder=new_analyzer_path, format="zarr")
