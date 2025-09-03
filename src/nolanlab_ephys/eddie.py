@@ -53,12 +53,15 @@ def make_and_run_stageout(source_folder, active_projects_path, destination_folde
 
     subprocess.run(['qsub', filename])
 
-def filepath_from_mouse_day_sessions(mouse, day, sessions, path_to_all_filepaths="all_filepaths.csv"):
+def filepath_from_mouse_day_sessions(mouse, day, sessions=None, path_to_all_filepaths="all_filepaths.csv"):
 
     all_filepaths = pd.read_csv(path_to_all_filepaths)
-
-    mouseday_filepaths = [all_filepaths.query(f'mouse == {mouse} & day == {day} & session == "{session}"')['filepath'].values[0] for session in sessions]
-
+    
+    if sessions is not None:
+        mouseday_filepaths = [all_filepaths.query(f'mouse == {mouse} & day == {day} & session == "{session}"')['filepath'].values[0] for session in sessions]
+    else:
+        mouseday_filepaths = all_filepaths.query(f'mouse == {mouse} & day == {day}')['filepath'].values
+        
     return mouseday_filepaths
 
 
