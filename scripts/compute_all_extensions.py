@@ -21,10 +21,6 @@ si.set_global_job_kwargs(n_jobs=8)
 analyzer_path = deriv_folder / f"M{mouse}/D{day}/full/kilosort4/kilosort4_sa"
 analyzer = si.load_sorting_analyzer(analyzer_path)
 
-if analyzer.has_extension("spike_locations") is True:
-    print(f"skipped M{mouse}_D{day}.")
-    exit()
-
 recording = get_chrono_concat_recording(data_folder=data_folder, mouse =mouse, day=day)
 pp_rec = si.common_reference(si.bandpass_filter(recording))
 

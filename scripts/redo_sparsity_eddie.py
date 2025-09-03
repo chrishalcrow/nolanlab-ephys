@@ -41,7 +41,7 @@ stagein_job_name = f"M{mouse}D{day}in"
 run_python_name = f"M{mouse}D{day}run"
 stageout_job_name = f"M{mouse}D{day}out" 
 
-python_arg = f"$HOME/.local/bin/uv run /exports/eddie/scratch/chalcrow/harry/fromgit/nolanlab-ephys/scripts/compute_all_extensions.py {mouse} {day} --data_folder={data_folder} --deriv_folder={deriv_folder}"
+python_arg = f"$HOME/.local/bin/uv run /exports/eddie/scratch/chalcrow/harry/fromgit/nolanlab-ephys/scripts/compute_all_extensions.py {mouse} {day}"
 
 run_stage_script(stagein_dict, job_name=stagein_job_name)
 run_python_script(python_arg, cores=8, email="chalcrow@ed.ac.uk", staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
