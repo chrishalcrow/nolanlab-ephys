@@ -16,11 +16,6 @@ parser.add_argument('--deriv_folder', default=None)
 mouse = int(parser.parse_args().mouse)
 day = int(parser.parse_args().day)
 
-sessions_string = parser.parse_args().sessions
-sessions = sessions_string.split(',')
-
-protocol = parser.parse_args().protocol
-
 data_folder = parser.parse_args().data_folder
 if data_folder is None:
     data_folder = eddie_data_folder
