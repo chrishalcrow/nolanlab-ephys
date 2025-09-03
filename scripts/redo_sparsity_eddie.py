@@ -3,6 +3,7 @@ from argparse import ArgumentParser
 from pathlib import Path
 from nolanlab_ephys.eddie import filepath_from_mouse_day_sessions
 from nolanlab_ephys.common_paths import  eddie_active_projects, eddie_data_folder, eddie_deriv_folder
+import subprocess
 
 parser = ArgumentParser()
 
@@ -31,6 +32,7 @@ stagein_dict = {}
 for recording_path in recording_paths:
     stagein_dict[f"{active_projects_path / recording_path}"] = data_folder
 stagein_dict[eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/full/kilosort4/kilosort4_sa"] = deriv_folder /  f"M{mouse}/D{day}/full/kilosort4/kilosort4_sa"
+subprocess.run(['mkdir', '-p', str(deriv_folder /  f"M{mouse}/D{day}/full/kilosort4/") ])
 
 stageout_dict = {}
 stageout_dict[deriv_folder / f"M{mouse}/D{day}/full/kilosort4/sub-{mouse}_ses-{day}_full_analyzer.zarr"] = eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/full/kilosort4/"
@@ -41,7 +43,6 @@ stageout_job_name = f"M{mouse}D{day}out"
 
 python_arg = f"$HOME/.local/bin/uv run /exports/eddie/scratch/chalcrow/harry/fromgit/nolanlab-ephys/scripts/compute_all_extensions.py {mouse} {day} --data_folder={data_folder} --deriv_folder={deriv_folder}"
 
-run_stage_script(stagein_dict, job_name=stagein_job_name)
 run_stage_script(stagein_dict, job_name=stagein_job_name)
 run_python_script(python_arg, cores=8, email="chalcrow@ed.ac.uk", staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
 run_stage_script(stageout_dict, job_name=stageout_job_name, hold_jid=run_python_name)
