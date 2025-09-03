@@ -41,9 +41,9 @@ for recording_path in recording_paths:
 stageout_dict = {}
 stageout_dict[deriv_folder / f"M{mouse}/D{day}/{''.join(sessions)}/"] = eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/"
 
-stagein_job_name = f"M{mouse}D{day}in" 
-run_python_name = f"M{mouse}D{day}run"
-stageout_job_name = f"M{mouse}D{day}out" 
+stagein_job_name = f"M{mouse}D{day}{sessions[0]}in" 
+run_python_name = f"M{mouse}D{day}{sessions[0]}run"
+stageout_job_name = f"M{mouse}D{day}{sessions[0]}out" 
 
 python_arg = f"$HOME/.local/bin/uv run /exports/eddie/scratch/chalcrow/harry/fromgit/nolanlab-ephys/scripts/sort_on_comp.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
 

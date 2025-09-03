@@ -36,7 +36,7 @@ def main():
         deriv_folder = "/home/nolanlab/Work/Harry_Project/derivatives/"
     deriv_folder = Path(deriv_folder)
 
-    si.set_global_job_kwargs(n_jobs=10)
+    si.set_global_job_kwargs(n_jobs=8)
 
     for protocol in protocols_list:
         _ = do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protocol)
@@ -45,11 +45,12 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
 
     protocol_info = protocols[protocol]
 
-    recording = get_chrono_concat_recording(data_folder=data_folder, mouse=mouse, day=day)
+    recording = get_chrono_concat_recording(data_folder=data_folder, mouse=mouse, day=day, sessions=sessions)
 
     pp_recording = si.apply_preprocessing_pipeline(recording, protocol_info['preprocessing'])
 
-    sorting = si.run_sorter(recording=pp_recording, **protocol_info['sorting'], remove_existing_folder=True, verbose=True)
+    sorting = si.run_sorter(recording=pp_recording, **protocol_info['sorting'], remove_existing_folder=True, verbose=True, folder=f"M{mouse}_D{day}_{protocol}_{'-'.join(sessions)}_output")
+    sorting = si.remove_excess_spikes(recording=recording, sorting=sorting)
 
     analyzer = si.create_sorting_analyzer(
         recording=si.apply_preprocessing_pipeline(recording, protocol_info['preprocessing_for_analyzer']), 
@@ -60,7 +61,7 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
 
     analyzer.compute(generic_postprocessing)
 
-    si.export_report(sorting_analyzer=analyzer, output_folder=deriv_folder / f"M{mouse}/D{day}/{''.join(sessions)}/{protocol}/{protocol}_report")
+    #si.export_report(sorting_analyzer=analyzer, output_folder=deriv_folder / f"M{mouse}/D{day}/{''.join(sessions)}/{protocol}/{protocol}_report")
 
     return analyzer
 

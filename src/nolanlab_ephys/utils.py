@@ -7,6 +7,15 @@ import spikeinterface.full as si
 def get_chrono_concat_recording(data_folder, mouse, day, sessions=None):
 
     recording_folders = chronologize_paths(get_recording_folders(data_folder=data_folder, mouse =mouse, day=day, sessions=sessions))
+    
+    mouseday_recording_folders = chronologize_paths(get_recording_folders(data_folder=data_folder, mouse =mouse, day=day))
+
+    session_names = get_session_names(mouseday_recording_folders)
+
+    included_sessions = [session_name in sessions for session_name in session_names]
+
+    recording_folders = np.array(mouseday_recording_folders)[np.array(included_sessions)]
+    
     if mouse in (20,21):
         recordings = [si.read_zarr(Path(recording_folder) / 'recording.zarr') for recording_folder in recording_folders]
     else:
@@ -48,12 +57,9 @@ def get_recording_folders(data_folder, mouse, day, sessions=None):
     # if len(list(Path(data_folder).glob('data/')))>0:
     #     data_path += 'data/'
 
-    if sessions is None:
-        sessions = ['of', 'vr', 'vr_multi_context', 'allen_brain_observatory_visual_sequences', 'allen_brain_observatory_visual_multi_sequences', 'allen_brain_observatory_visual_coding', 'dvd_waitscreen']
+    sessions = ['of', 'vr', 'vr_multi_context', 'allen_brain_observatory_visual_sequences', 'allen_brain_observatory_visual_multi_sequences', 'allen_brain_observatory_visual_coding', 'dvd_waitscreen']
 
     recording_folders = list(Path(data_path).glob(f"M{mouse}_D{day}_*"))
-    for session_type in sessions:
-        recording_folders += list(Path(data_path).glob(f"{session_type}/M{mouse}_D{day}_*"))
 
     for a, recording_folder in enumerate(recording_folders):
         recording_folders[a] = str(recording_folder)
