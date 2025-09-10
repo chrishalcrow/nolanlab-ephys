@@ -22,6 +22,8 @@ analyzer_path = deriv_folder / f"M{mouse}/D{day}/full/kilosort4/kilosort4_sa"
 analyzer = si.load_sorting_analyzer(analyzer_path)
 
 recording = get_chrono_concat_recording(data_folder=data_folder, mouse =mouse, day=day)
+recording = si.aggregate_channels(recording.split_by('group'))
+
 pp_rec = si.common_reference(si.bandpass_filter(recording))
 
 old_channel_locations = analyzer.get_channel_locations()
@@ -31,7 +33,8 @@ old_channel_ids = []
 for channel_id, channel_locations in zip(recording.get_channel_ids(), recording.get_channel_locations()):
     if 2 in np.sum(channel_locations == old_channel_locations, axis=1):
         old_channel_ids.append(channel_id)
-        analyzer._recording = pp_rec.select_channels(old_channel_ids)
+
+analyzer._recording = pp_rec.select_channels(old_channel_ids)
 
 from copy import deepcopy
 new_analyzer = analyzer.save_as(format="memory")
