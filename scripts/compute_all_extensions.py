@@ -53,13 +53,14 @@ new_analyzer.compute({
     'noise_levels': {},
     'waveforms': {},
     'templates': {},
-    'spike_amplitudes': {},
+    'spike_amplitudes': {'spike_retriver_kwargs': {'peak_sign': 'both'}},
     'isi_histograms': {},
-    'spike_locations': {},
+    'spike_locations': {'spike_retriver_kwargs': {'peak_sign': 'both'}},
     'correlograms': {},
-    'quality_metrics': {},
-    'template_metrics': {'include_multi_channel_metrics': True},
+    'template_similarity': {'method': 'l2'},
+    'quality_metrics': {'metric_params': {'snr': {'peak_sign': 'both'}, 'amplitude_cutoff': {'peak_sign': 'both'}, 'amplitude_median': {'peak_sign': 'both'}}},
+    'template_metrics': {'include_multi_channel_metrics': True, 'peak_sign': 'both'},
 })
 
-new_analyzer_path = deriv_folder / f"M{mouse}/D{day}/full/kilosort4/sub-{mouse}_ses-{day}_full_analyzer"
+new_analyzer_path = deriv_folder / f"M{mouse}/D{day}/full/kilosort4/sub-{mouse}_ses-{day}_srt-kilosort4_full_analyzer"
 new_analyzer.save_as(folder=new_analyzer_path, format="zarr")
