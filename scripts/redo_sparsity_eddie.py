@@ -39,7 +39,7 @@ for day in days:
     subprocess.run(['mkdir', '-p', str(deriv_folder /  f"M{mouse}/D{day}/full/kilosort4/") ])
 
     stageout_dict = {}
-    stageout_dict[deriv_folder / f"M{mouse}/D{day}/full/kilosort4/sub-{mouse}_ses-{day}_full_analyzer.zarr"] = eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/full/kilosort4/"
+    stageout_dict[deriv_folder / f"M{mouse}/D{day}/full/kilosort4/sub-{mouse}_ses-{day}_srt-kilosort4_full_analyzer.zarr"] = eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/full/kilosort4/"
 
     stagein_job_name = f"M{mouse}D{day}in" 
     run_python_name = f"M{mouse}D{day}run"
