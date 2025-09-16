@@ -53,12 +53,12 @@ new_analyzer.compute({
     'noise_levels': {},
     'waveforms': {},
     'templates': {},
-    'spike_amplitudes': {'spike_retriver_kwargs': {'peak_sign': 'both'}},
+    'spike_amplitudes': {'peak_sign': 'both'},
     'isi_histograms': {},
     'spike_locations': {'spike_retriver_kwargs': {'peak_sign': 'both'}},
     'correlograms': {},
     'template_similarity': {'method': 'l2'},
-    'quality_metrics': {'metric_params': {'snr': {'peak_sign': 'both'}, 'amplitude_cutoff': {'peak_sign': 'both'}, 'amplitude_median': {'peak_sign': 'both'}}},
+    'quality_metrics': {'metric_names': ['num_spikes', 'firing_rate', 'presence_ratio', 'snr', 'isi_violation', 'rp_violation', 'sliding_rp_violation', 'amplitude_cutoff', 'amplitude_median', 'amplitude_cv', 'synchrony', 'firing_range', 'drift', 'sd_ratio'], 'metric_params': {'snr': {'peak_sign': 'both'}, 'amplitude_cutoff': {'peak_sign': 'both'}, 'amplitude_median': {'peak_sign': 'both'}}},
     'template_metrics': {'include_multi_channel_metrics': True, 'peak_sign': 'both'},
 })
 
