@@ -56,7 +56,7 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
         recording=si.apply_preprocessing_pipeline(recording, protocol_info['preprocessing_for_analyzer']), 
         sorting=sorting, 
         folder = deriv_folder / f"M{mouse}/D{day}/{''.join(sessions)}/{protocol}/{protocol}_sa",
-        format = "binary_folder"
+        format = "zarr"
     )
 
     analyzer.compute(generic_postprocessing)
