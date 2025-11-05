@@ -4,18 +4,26 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 dependencies = [
-    "herdingspikes>=0.4.6",
     "ipykernel>=6.29.5",
-    "llvmlite>=0.44.0",
-    "matplotlib>=3.10.3",
-    "numba>=0.61.0",
+    "ipympl>=0.9.8",
+    "ipywidgets>=8.1.7",
+    "matplotlib",
     "numpy",
     "pandas>=2.2.3",
-    "scipy>=1.15.2",
-    "spikeinterface@git+https://github.com/SpikeInterface/spikeinterface.git",
+    "pynapple>=0.10.1",
+    "scipy",
+    "spikeinterface",
 ]
 
 
 [build-system]
 requires = ["setuptools>=78.0.2"]
 build-backend = "setuptools.build_meta"
+
+[tool.uv.sources]
+nolanlab-ephys = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "nolanlab-ephys",
+]
