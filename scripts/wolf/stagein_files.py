@@ -2,19 +2,19 @@ from nolanlab_ephys.eddie import filepath_from_mouse_day_sessions, make_and_run_
 from argparse import ArgumentParser
 from nolanlab_ephys.common_paths import eddie_active_projects
 from nolanlab_ephys.utils import get_recording_folders
+from pathlib import Path
 
 parser = ArgumentParser()
 
 parser.add_argument('mouse')
 parser.add_argument('day')
-parser.add_argument('sessions')
-parser.add_argument('destination')
+parser.add_argument('--destination', default=None)
 
 mouse = int(parser.parse_args().mouse)
 day = int(parser.parse_args().day)
-sessions_string = parser.parse_args().sessions
-sessions = sessions_string.split(',')
 destination = parser.parse_args().destination
+if destination is None:
+    destination = Path("/exports/eddie/scratch/chalcrow/wolf/derivatives")
 
 active_projects_path = eddie_active_projects
 data_path = active_projects_path / "Harry/EphysNeuropixelData/"
