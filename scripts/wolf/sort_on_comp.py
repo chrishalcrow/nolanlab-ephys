@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from pathlib import Path
 from nolanlab_ephys.si_protocols import protocols
-from nolanlab_ephys.utils import get_chrono_concat_recording
+from nolanlab_ephys.utils import get_recording_folders, chronologize_paths
 from nolanlab_ephys.si_protocols import generic_postprocessing
 
 import spikeinterface.full as si
@@ -45,24 +45,26 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
 
     protocol_info = protocols[protocol]
 
-    recording = get_chrono_concat_recording(data_folder=data_folder, mouse=mouse, day=day, sessions=sessions)
+    recording_paths = chronologize_paths(get_recording_folders(data_folder=data_folder, mouse =mouse, day=day))
+    recordings = [si.read_openephys(recording_path) for recording_path in recording_paths]
+    concatenated_recording = si.concatenate_recordings(recordings)
 
-    pp_recording = si.apply_preprocessing_pipeline(recording, protocol_info['preprocessing'])
+    pp_recording = si.apply_preprocessing_pipeline(concatenated_recording, protocol_info['preprocessing'])
 
     sorting = si.run_sorter(recording=pp_recording, **protocol_info['sorting'], remove_existing_folder=True, verbose=True, folder=f"M{mouse}_D{day}_{protocol}_{'-'.join(sessions)}_output")
 
-    analyzer = si.create_sorting_analyzer(
-        recording=si.apply_preprocessing_pipeline(recording, protocol_info['preprocessing_for_analyzer']), 
-        sorting=sorting, 
-        folder = deriv_folder / f"M{mouse}/D{day}/{''.join(sessions)}/{protocol}/{protocol}_sa",
-        format = "zarr",
-        peak_sign = "both",
-        radius_um = 70,
-    )
+    for recording, session in zip(recordings, sessions):
+
+        analyzer = si.create_sorting_analyzer(
+            recording=si.apply_preprocessing_pipeline(recording, protocol_info['preprocessing_for_analyzer']), 
+            sorting=sorting, 
+            folder = deriv_folder / f"M{mouse}/D{day}/{session}/sub-{mouse}_ses-{day}-{session}_{protocol}_analyzer",
+            format = "zarr",
+            peak_sign = "both",
+            radius_um = 70,
+        )
 
     analyzer.compute(generic_postprocessing)
-
-    #si.export_report(sorting_analyzer=analyzer, output_folder=deriv_folder / f"M{mouse}/D{day}/{''.join(sessions)}/{protocol}/{protocol}_report")
 
     return analyzer
 

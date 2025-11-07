@@ -50,5 +50,5 @@ python_arg = f"$HOME/.local/bin/uv run /exports/eddie/scratch/chalcrow/wolf/code
 print(f"{sessions=}")
 
 run_stage_script(stagein_dict, job_name=stagein_job_name)
-#run_python_script(python_arg, cores=8, email="chalcrow@ed.ac.uk", staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
+run_python_script(python_arg, cores=8, email="chalcrow@ed.ac.uk", staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
 #run_stage_script(stageout_dict, job_name=stageout_job_name, hold_jid=run_python_name)
