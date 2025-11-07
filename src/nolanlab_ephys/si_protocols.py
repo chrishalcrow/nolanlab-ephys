@@ -1,13 +1,17 @@
 protocols = {
 
     'kilosort4A': {
-        'preprocessing': {},
+        'preprocessing': {
+            'detect_and_remove_bad_channels': {'seed': 1205},
+            'phase_shift': {},
         'sorting': {
             'sorter_name': 'kilosort4',
             'do_correction': False,
             'use_binary_file': False,
         },
         'preprocessing_for_analyzer': {
+            'detect_and_remove_bad_channels': {'seed': 1205},
+            'phase_shift': {},
             'common_reference': {},
             'bandpass_filter': {},
         },

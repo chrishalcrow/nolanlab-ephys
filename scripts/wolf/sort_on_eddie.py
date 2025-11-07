@@ -45,10 +45,11 @@ stagein_job_name = f"M{mouse}D{day}{sessions[0]}in"
 run_python_name = f"M{mouse}D{day}{sessions[0]}run"
 stageout_job_name = f"M{mouse}D{day}{sessions[0]}out" 
 
-python_arg = f"$HOME/.local/bin/uv run /exports/eddie/scratch/chalcrow/wolf/code/nolanlab-ephys/scripts/wolf/sort_on_comp.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
+uv_directory = "/exports/eddie/scratch/chalcrow/wolf/code/nolanlab-ephys/"
+python_arg = f"scripts/wolf/sort_on_comp.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
 
 print(f"{sessions=}")
 
 run_stage_script(stagein_dict, job_name=stagein_job_name)
-run_python_script(python_arg, cores=8, email="chalcrow@ed.ac.uk", staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
+run_python_script(uv_directory, python_arg, cores=8, email="chalcrow@ed.ac.uk", staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
 #run_stage_script(stageout_dict, job_name=stageout_job_name, hold_jid=run_python_name)
