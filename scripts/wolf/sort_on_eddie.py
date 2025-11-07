@@ -45,7 +45,7 @@ stagein_job_name = f"M{mouse}D{day}{sessions[0]}in"
 run_python_name = f"M{mouse}D{day}{sessions[0]}run"
 stageout_job_name = f"M{mouse}D{day}{sessions[0]}out" 
 
-python_arg = f"$HOME/.local/bin/uv run /exports/eddie/scratch/chalcrow/harry/fromgit/nolanlab-ephys/scripts/wolf/sort_on_comp.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
+python_arg = f"$HOME/.local/bin/uv run /exports/eddie/scratch/chalcrow/wolf/code/nolanlab-ephys/scripts/wolf/sort_on_comp.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
 
 print(f"{sessions=}")
 
