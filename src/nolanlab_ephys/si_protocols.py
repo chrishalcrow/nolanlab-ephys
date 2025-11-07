@@ -4,6 +4,7 @@ protocols = {
         'preprocessing': {
             'detect_and_remove_bad_channels': {'seed': 1205},
             'phase_shift': {},
+        },
         'sorting': {
             'sorter_name': 'kilosort4',
             'do_correction': False,
