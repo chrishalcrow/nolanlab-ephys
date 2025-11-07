@@ -8,8 +8,8 @@ parser = ArgumentParser()
 
 parser.add_argument('mouse')
 parser.add_argument('day')
-parser.add_argument('sessions')
 parser.add_argument('protocol')
+parser.add_argument('--sessions', default=None)
 parser.add_argument('--data_folder', default=None)
 parser.add_argument('--deriv_folder', default=None)
 
