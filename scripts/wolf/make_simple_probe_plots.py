@@ -1,11 +1,8 @@
 from argparse import ArgumentParser
 from pathlib import Path
-from nolanlab_ephys.eddie import filepath_from_mouse_day_sessions
 from nolanlab_ephys.common_paths import  eddie_data_folder, eddie_deriv_folder
-from nolanlab_ephys.probe_info import rec_to_simple_probe
-from nolanlab_ephys.utils import get_recording_folders, chronologize_paths
-import matplotlib.pyplot as plt
-import numpy as np
+from nolanlab_ephys.probe_info import rec_to_simple_probe, make_probe_plot
+from nolanlab_ephys.utils import get_recording_folders
 
 parser = ArgumentParser()
 
@@ -32,12 +29,4 @@ sessions = ['VR']
 recording_path = get_recording_folders(data_folder=data_folder, mouse =mouse, day=day)[0]
 
 probe_vector_representation = rec_to_simple_probe(recording_path)
-
-matrix_representation = np.reshape(probe_vector_representation, (4,4))
-
-fig, ax = plt.subplots()
-ax.imshow(matrix_representation.astype('float'))
-ax.set_axis_off()
-fig.tight_layout()
-fig.savefig(deriv_folder / f"M{mouse}_D{day}_probe_layout.png")
-
+make_probe_plot(probe_vector_representation, save_folder=deriv_folder / f"M{mouse}_D{day}_probe_layout.png")

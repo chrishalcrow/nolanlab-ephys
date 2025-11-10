@@ -1,5 +1,5 @@
-import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 import spikeinterface.full as si
 
@@ -44,3 +44,13 @@ def rec_to_simple_probe(rec_path):
     data_row = [np.any(np.all(np.array(loc) == list(channel_locations), axis=1)) for loc in locs_to_blocks.values()]
         
     return data_row
+
+def make_probe_plot(probe_vector_representation, save_path):
+        
+    matrix_representation = np.reshape(probe_vector_representation, (4,4))
+
+    fig, ax = plt.subplots()
+    ax.imshow(matrix_representation.astype('float'))
+    ax.set_axis_off()
+    fig.tight_layout()
+    fig.savefig(save_path)

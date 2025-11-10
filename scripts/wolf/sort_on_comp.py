@@ -2,6 +2,7 @@ from argparse import ArgumentParser
 from pathlib import Path
 from nolanlab_ephys.si_protocols import protocols
 from nolanlab_ephys.utils import get_recording_folders, chronologize_paths
+from nolanlab_ephys.probe_info import rec_to_simple_probe, make_probe_plot
 from nolanlab_ephys.si_protocols import generic_postprocessing
 
 import spikeinterface.full as si
@@ -46,10 +47,14 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
     protocol_info = protocols[protocol]
 
     recording_paths = chronologize_paths(get_recording_folders(data_folder=data_folder, mouse =mouse, day=day))
-    recordings = [si.read_openephys(recording_path) for recording_path in recording_paths]
 
-    print(f"{sessions=}")
-    print(f"{recordings=}")
+    try:
+        probe_vector_representation = rec_to_simple_probe(recording_paths[0])
+        make_probe_plot(probe_vector_representation, save_path=deriv_folder / f"M{mouse}/D{day}/M{mouse}_D{day}_probe_layout.png")
+    except:
+        print("Could not make probe plot.")
+
+    recordings = [si.read_openephys(recording_path) for recording_path in recording_paths]
 
     concatenated_recording = si.concatenate_recordings(recordings)
 
