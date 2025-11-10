@@ -3,6 +3,7 @@ from pathlib import Path
 from nolanlab_ephys.eddie import filepath_from_mouse_day_sessions
 from nolanlab_ephys.common_paths import  eddie_data_folder, eddie_deriv_folder
 from nolanlab_ephys.probe_info import rec_to_simple_probe
+from nolanlab_ephys.utils import get_recording_folders, chronologize_paths
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -28,9 +29,7 @@ deriv_folder = Path(deriv_folder)
 
 sessions = ['VR']
 
-recording_path = data_folder / filepath_from_mouse_day_sessions(mouse, day, sessions)[0]
-
-print(f"{recording_path=}")
+recording_path = get_recording_folders(data_folder=data_folder, mouse =mouse, day=day)[0]
 
 probe_vector_representation = rec_to_simple_probe(recording_path)
 
