@@ -29,4 +29,4 @@ sessions = ['VR']
 recording_path = get_recording_folders(data_folder=data_folder, mouse =mouse, day=day)[0]
 
 probe_vector_representation = rec_to_simple_probe(recording_path)
-make_probe_plot(probe_vector_representation, save_path=deriv_folder / f"M{mouse}_D{day}_probe_layout.png")
+make_probe_plot(probe_vector_representation, save_path=deriv_folder / f"M{mouse}/D{day}/M{mouse}_D{day}_probe_layout.png")
