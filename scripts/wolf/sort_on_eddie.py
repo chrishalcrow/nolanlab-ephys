@@ -39,7 +39,8 @@ for recording_path in recording_paths:
     stagein_dict[f"{active_projects_path / recording_path}"] = data_folder
 
 stageout_dict = {}
-stageout_dict[deriv_folder / f"M{mouse}/D{day}/{''.join(sessions)}/"] = eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/"
+for session in sessions:
+    stageout_dict[deriv_folder / f"M{mouse}/D{day}/{session}/sub-{mouse}_ses-{day}-{session}_{protocol}_analyzer"] = eddie_active_projects / "Chris/Cohort12/Wolf_Experiment/derivatives" / f"M{mouse}/D{day}/"
 
 stagein_job_name = f"M{mouse}D{day}{sessions[0]}in" 
 run_python_name = f"M{mouse}D{day}{sessions[0]}run"
@@ -52,4 +53,4 @@ print(f"{sessions=}")
 
 run_stage_script(stagein_dict, job_name=stagein_job_name)
 run_python_script(uv_directory, python_arg, cores=8, email="chalcrow@ed.ac.uk", staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
-#run_stage_script(stageout_dict, job_name=stageout_job_name, hold_jid=run_python_name)
+run_stage_script(stageout_dict, job_name=stageout_job_name, hold_jid=run_python_name)
