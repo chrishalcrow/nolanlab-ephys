@@ -47,6 +47,10 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
 
     recording_paths = chronologize_paths(get_recording_folders(data_folder=data_folder, mouse =mouse, day=day))
     recordings = [si.read_openephys(recording_path) for recording_path in recording_paths]
+
+    print(f"{sessions=}")
+    print(f"{recordings=}")
+
     concatenated_recording = si.concatenate_recordings(recordings)
 
     pp_recording = si.apply_preprocessing_pipeline(concatenated_recording, protocol_info['preprocessing'])
@@ -64,7 +68,7 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
             radius_um = 70,
         )
 
-    analyzer.compute(generic_postprocessing)
+        analyzer.compute(generic_postprocessing)
 
     return analyzer
 
