@@ -45,7 +45,9 @@ def rec_to_simple_probe(rec_path):
         
     return data_row
 
-def make_probe_plot(probe_vector_representation, save_path):
+def make_probe_plot(rec_path, save_path):
+
+    probe_vector_representation = rec_to_simple_probe(rec_path)
         
     matrix_representation = np.reshape(probe_vector_representation, (4,4))
 

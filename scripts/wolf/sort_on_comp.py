@@ -49,8 +49,7 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
     recording_paths = chronologize_paths(get_recording_folders(data_folder=data_folder, mouse =mouse, day=day))
 
     try:
-        probe_vector_representation = rec_to_simple_probe(recording_paths[0])
-        make_probe_plot(probe_vector_representation, save_path=deriv_folder / f"M{mouse}/D{day}/M{mouse}_D{day}_probe_layout.png")
+        make_probe_plot(recording_paths[0], save_path=deriv_folder / f"M{mouse}/D{day}/M{mouse}_D{day}_probe_layout.png")
     except:
         print("Could not make probe plot.")
 
