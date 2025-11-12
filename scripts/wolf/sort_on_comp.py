@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from pathlib import Path
 from nolanlab_ephys.si_protocols import protocols
 from nolanlab_ephys.utils import get_recording_folders, chronologize_paths
-from nolanlab_ephys.probe_info import rec_to_simple_probe, make_probe_plot
+from nolanlab_ephys.probe_info import make_probe_plot
 from nolanlab_ephys.si_protocols import generic_postprocessing
 
 import spikeinterface.full as si
@@ -48,10 +48,7 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
 
     recording_paths = chronologize_paths(get_recording_folders(data_folder=data_folder, mouse =mouse, day=day))
 
-    try:
-        make_probe_plot(recording_paths[0], save_path=deriv_folder / f"M{mouse}/D{day}/M{mouse}_D{day}_probe_layout.png")
-    except:
-        print("Could not make probe plot.")
+    make_probe_plot(recording_paths[0], save_path=deriv_folder / f"M{mouse}/D{day}/M{mouse}_D{day}_probe_layout.png")
 
     recordings = [si.read_openephys(recording_path) for recording_path in recording_paths]
 
@@ -62,6 +59,9 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
     sorting = si.run_sorter(recording=pp_recording, **protocol_info['sorting'], remove_existing_folder=True, verbose=True, folder=f"M{mouse}_D{day}_{protocol}_{'-'.join(sessions)}_output")
 
     for recording, session in zip(recordings, sessions):
+
+        # we do all our syncing assuming that t=0 is at the start of the ephys data
+        recording._recording_segments[0].t_start = 0
 
         analyzer = si.create_sorting_analyzer(
             recording=si.apply_preprocessing_pipeline(recording, protocol_info['preprocessing_for_analyzer']), 

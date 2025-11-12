@@ -19,6 +19,8 @@ or make a venv using
 uv venv
 ```
 
+## Using on EDDIE
+
 The package is designed to be used on the Nolan Lab's data on your local computer or on EDDIE, the Edinburgh supercomputer. To run a spike sorting pipeline on Eddie, do the following. First, log on to EDDIE and get a login node:
 
 ``` bash

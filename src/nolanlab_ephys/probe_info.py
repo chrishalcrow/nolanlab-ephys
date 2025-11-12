@@ -47,12 +47,19 @@ def rec_to_simple_probe(rec_path):
 
 def make_probe_plot(rec_path, save_path):
 
-    probe_vector_representation = rec_to_simple_probe(rec_path)
-        
-    matrix_representation = np.reshape(probe_vector_representation, (4,4))
+    try:
 
-    fig, ax = plt.subplots()
-    ax.imshow(matrix_representation.astype('float'))
-    ax.set_axis_off()
-    fig.tight_layout()
-    fig.savefig(save_path)
+        probe_vector_representation = rec_to_simple_probe(rec_path)
+            
+        matrix_representation = np.reshape(probe_vector_representation, (4,4))
+
+        fig, ax = plt.subplots()
+        ax.imshow(matrix_representation.astype('float'))
+        ax.set_axis_off()
+        fig.tight_layout()
+        fig.savefig(save_path)
+
+    except:
+        print("Could not make probe plot.")
+
+    return
