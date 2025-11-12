@@ -61,7 +61,7 @@ def get_recording_folders(data_folder, mouse, day, sessions=None):
 
     sessions = ['of', 'vr', 'vr_multi_context', 'allen_brain_observatory_visual_sequences', 'allen_brain_observatory_visual_multi_sequences', 'allen_brain_observatory_visual_coding', 'dvd_waitscreen']
 
-    recording_folders = list(Path(data_path).glob(f"M{mouse}_D{day}_*"))
+    recording_folders = list(Path(data_path).glob(f"M0{mouse}_D0{day}_*"))
 
     for a, recording_folder in enumerate(recording_folders):
         recording_folders[a] = str(recording_folder)
