@@ -37,6 +37,9 @@ def main():
         deriv_folder = "/home/nolanlab/Work/Harry_Project/derivatives/"
     deriv_folder = Path(deriv_folder)
 
+    mouseday_deriv_folder = deriv_folder / f"M{mouse}/D{day}"
+    mouseday_deriv_folder.mkdir(parents=True, exist_ok=True)
+
     si.set_global_job_kwargs(n_jobs=8)
 
     for protocol in protocols_list:
