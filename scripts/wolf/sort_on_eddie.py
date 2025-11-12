@@ -37,7 +37,8 @@ email = parser.parse_args().email
 if email is None:
     email = "chalcrow@ed.ac.uk"
 
-recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions)
+path_to_all_filepaths = "scripts/wolf/wolf_filepaths.csv"
+recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions=None, path_to_all_filepaths=path_to_all_filepaths)
 active_projects_path = eddie_active_projects
 
 stagein_dict = {}
