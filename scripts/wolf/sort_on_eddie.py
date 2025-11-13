@@ -47,11 +47,12 @@ for recording_path in recording_paths:
 
 stageout_dict = {}
 for session in sessions:
-    stageout_dict[deriv_folder / f"M{mouse}/D{day}/{session}/sub-{mouse}_ses-{day}-{session}_{protocol}_analyzer.zarr"] = eddie_active_projects / "Chris/Wolf_Experiment/derivatives" / f"M{mouse}/D{day}/{session}"
+    stageout_dict[deriv_folder / f"M{mouse:02d}/D{day:02d}/{session}/sub-{mouse:02d}_ses-{day:02d}-{session}_{protocol}_analyzer.zarr/"] = eddie_active_projects / "Chris/Wolf_Experiment/derivatives" / f"M{mouse:02d}/D{day:02d}/{session}/"
+    stageout_dict[deriv_folder / f"M{mouse:02d}/D{day:02d}/{session}/M{mouse:02d}_D{day:02d}_probe_layout.png"] = eddie_active_projects / "Chris/Wolf_Experiment/derivatives" / f"M{mouse:02d}/D{day:02d}/{session}/"
 
-stagein_job_name = f"M{mouse}D{day}{sessions[0]}in" 
-run_python_name = f"M{mouse}D{day}{sessions[0]}run"
-stageout_job_name = f"M{mouse}D{day}{sessions[0]}out" 
+stagein_job_name = f"M{mouse}D{day}{sessions[0][:2]}in" 
+run_python_name = f"M{mouse}D{day}{sessions[0][:2]}run"
+stageout_job_name = f"M{mouse}D{day}{sessions[0][:2]}out" 
 
 uv_directory = os.getcwd()
 python_arg = f"scripts/wolf/sort_on_comp.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"

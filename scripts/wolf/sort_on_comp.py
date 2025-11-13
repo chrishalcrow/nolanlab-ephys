@@ -37,7 +37,7 @@ def main():
         deriv_folder = "/home/nolanlab/Work/Harry_Project/derivatives/"
     deriv_folder = Path(deriv_folder)
 
-    mouseday_deriv_folder = deriv_folder / f"M{mouse}/D{day}"
+    mouseday_deriv_folder = deriv_folder / f"M{mouse:02d}/D{day:02d}"
     mouseday_deriv_folder.mkdir(parents=True, exist_ok=True)
 
     si.set_global_job_kwargs(n_jobs=8)
@@ -51,7 +51,7 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
 
     recording_paths = chronologize_paths(get_recording_folders(data_folder=data_folder, mouse =mouse, day=day))
 
-    make_probe_plot(recording_paths[0], save_path=deriv_folder / f"M{mouse}/D{day}/M{mouse}_D{day}_probe_layout.png")
+    make_probe_plot(recording_paths[0], save_path=deriv_folder / f"M{mouse:02d}/D{day:02d}/M{mouse:02d}_D{day:02d}_probe_layout.png")
 
     recordings = [si.read_openephys(recording_path) for recording_path in recording_paths]
 
@@ -59,7 +59,7 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
 
     pp_recording = si.apply_preprocessing_pipeline(concatenated_recording, protocol_info['preprocessing'])
 
-    sorting = si.run_sorter(recording=pp_recording, **protocol_info['sorting'], remove_existing_folder=True, verbose=True, folder=f"M{mouse}_D{day}_{protocol}_{'-'.join(sessions)}_output")
+    sorting = si.run_sorter(recording=pp_recording, **protocol_info['sorting'], remove_existing_folder=True, verbose=True, folder=f"M{mouse:02d}_D{day:02d}_{protocol}_{'-'.join(sessions)}_output")
 
     for recording, session in zip(recordings, sessions):
 
@@ -69,7 +69,7 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
         analyzer = si.create_sorting_analyzer(
             recording=si.apply_preprocessing_pipeline(recording, protocol_info['preprocessing_for_analyzer']), 
             sorting=sorting, 
-            folder = deriv_folder / f"M{mouse}/D{day}/{session}/sub-{mouse}_ses-{day}-{session}_{protocol}_analyzer",
+            folder = deriv_folder / f"M{mouse:02d}/D{day:02d}/{session}/sub-{mouse:02d}_ses-{day:02d}-{session}_{protocol}_analyzer",
             format = "zarr",
             peak_sign = "both",
             radius_um = 70,
