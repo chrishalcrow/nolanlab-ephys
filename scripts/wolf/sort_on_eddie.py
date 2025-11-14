@@ -47,7 +47,8 @@ for recording_path in recording_paths:
 
 stageout_dict = {}
 for session in sessions:
-    stageout_dict[deriv_folder / f"M{mouse:02d}/D{day:02d}/{session}/sub-{mouse:02d}_ses-{day:02d}-{session}_{protocol}_analyzer.zarr/"] = eddie_active_projects / "Chris/Wolf_Experiment/derivatives" / f"M{mouse:02d}/D{day:02d}/{session}/"
+    
+    stageout_dict[deriv_folder / f"M{mouse:02d}/D{day:02d}/{session}/sub-{mouse:02d}_day-{day:02d}_ses-{session}_srt-{protocol}_analyzer"] = eddie_active_projects / "Chris/Wolf_Experiment/derivatives" / f"M{mouse:02d}/D{day:02d}/{session}/"
 stageout_dict[deriv_folder / f"M{mouse:02d}/D{day:02d}/M{mouse:02d}_D{day:02d}_probe_layout.png"] = eddie_active_projects / "Chris/Wolf_Experiment/derivatives" / f"M{mouse:02d}/D{day:02d}/"
 
 stagein_job_name = f"M{mouse}D{day}{sessions[0][:2]}in" 
