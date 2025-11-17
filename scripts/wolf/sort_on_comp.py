@@ -3,7 +3,7 @@ from pathlib import Path
 from nolanlab_ephys.si_protocols import protocols
 from nolanlab_ephys.utils import get_recording_folders, chronologize_paths
 from nolanlab_ephys.probe_info import make_probe_plot
-from nolanlab_ephys.si_protocols import generic_postprocessing
+from nolanlab_ephys.si_protocols import generic_postprocessing, compute_automated_curation
 
 import spikeinterface.full as si
 
@@ -76,6 +76,10 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
         )
 
         analyzer.compute(generic_postprocessing)
+
+    unitrefine_model_path = "/exports/eddie/scratch/chalcrow/wolf/code/models/curationA_model"
+    curation_output_path = deriv_folder / f"M{mouse:02d}/D{day:02d}/{session}/{protocol}/sub-{mouse:02d}_day-{day:02d}_ses-{session}_srt-{protocol}_curationA.json"
+    compute_automated_curation(analyzer, unitrefine_model_path, curation_output_path=curation_output_path)
 
     return analyzer
 
