@@ -14,6 +14,7 @@ dependencies = [
     "numpy",
     "pandas>=2.2.3",
     "scipy",
+    "skops>=0.13.0",
     "spikeinterface",
 ]
 
