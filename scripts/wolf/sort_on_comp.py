@@ -61,14 +61,22 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
 
     sorting = si.run_sorter(recording=pp_recording, **protocol_info['sorting'], remove_existing_folder=True, verbose=True, folder=f"M{mouse:02d}_D{day:02d}_{protocol}_{'-'.join(sessions)}_output")
 
+    cumulative_samples = 0
+
     for recording, session in zip(recordings, sessions):
 
         # we do all our syncing assuming that t=0 is at the start of the ephys data
         recording._recording_segments[0].t_start = 0
 
+        recording_total_samples = recording.get_total_samples()
+        one_sorting = sorting.frame_slice(cumulative_samples, cumulative_samples+recording_total_samples)
+        cumulative_samples += recording_total_samples
+
+        one_sorting = si.remove_redundant_units(one_sorting, remove_strategy="max_spikes")
+
         analyzer = si.create_sorting_analyzer(
             recording=si.apply_preprocessing_pipeline(recording, protocol_info['preprocessing_for_analyzer']), 
-            sorting=sorting, 
+            sorting=one_sorting, 
             folder = deriv_folder / f"M{mouse:02d}/D{day:02d}/{session}/{protocol}/sub-{mouse:02d}_day-{day:02d}_ses-{session}_srt-{protocol}_analyzer",
             format = "zarr",
             peak_sign = "both",
