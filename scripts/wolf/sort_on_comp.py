@@ -74,7 +74,7 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
         one_sorting = sorting.frame_slice(cumulative_samples, cumulative_samples+recording_total_samples)
         cumulative_samples += recording_total_samples
 
-        one_sorting = si.remove_redundant_units(one_sorting, remove_strategy="max_spikes")
+        one_sorting = si.remove_redundant_units(one_sorting, remove_strategy="max_spikes", align=False)
 
         analyzer = si.create_sorting_analyzer(
             recording=si.apply_preprocessing_pipeline(recording, protocol_info['preprocessing_for_analyzer']), 
