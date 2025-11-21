@@ -4,6 +4,7 @@ from nolanlab_ephys.si_protocols import protocols
 from nolanlab_ephys.utils import get_recording_folders, chronologize_paths
 from nolanlab_ephys.probe_info import make_probe_plot
 from nolanlab_ephys.si_protocols import generic_postprocessing, compute_automated_curation
+from spikeinterface.curation.remove_excess_spikes import remove_excess_spikes
 
 import spikeinterface.full as si
 
@@ -59,7 +60,8 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
 
     pp_recording = si.apply_preprocessing_pipeline(concatenated_recording, protocol_info['preprocessing'])
 
-    sorting = si.run_sorter(recording=pp_recording, **protocol_info['sorting'], remove_existing_folder=True, verbose=True, folder=f"M{mouse:02d}_D{day:02d}_{protocol}_{'-'.join(sessions)}_output")
+    sorting = si.read_kilosort(f"M{mouse:02d}_D{day:02d}_{protocol}_{'-'.join(sessions)}_output/sorter_output")#si.run_sorter(recording=pp_recording, **protocol_info['sorting'], remove_existing_folder=True, verbose=True, folder=f"M{mouse:02d}_D{day:02d}_{protocol}_{'-'.join(sessions)}_output")
+    sorting = remove_excess_spikes(sorting, concatenated_recording)
 
     cumulative_samples = 0
 
