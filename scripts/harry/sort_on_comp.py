@@ -59,7 +59,7 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
     analyzer = si.create_sorting_analyzer(
         recording=si.apply_preprocessing_pipeline(recording, protocol_info['preprocessing_for_analyzer']), 
         sorting=sorting, 
-        folder = deriv_folder / f"M{mouse}/D{day}/{''.join(sessions)}/{protocol}/{protocol}ks412_sa",
+        folder = deriv_folder / f"M{mouse}/D{day}/{''.join(sessions)}/{protocol}_ks412/{protocol}",
         format = "zarr",
         peak_sign = "both",
         radius_um = 70,
