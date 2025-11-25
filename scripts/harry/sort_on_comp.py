@@ -52,7 +52,8 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
 
     pp_recording = si.apply_preprocessing_pipeline(recording, protocol_info['preprocessing'])
 
-    sorting = si.run_sorter(recording=pp_recording, **protocol_info['sorting'], remove_existing_folder=True, verbose=True, folder=f"M{mouse}_D{day}_{protocol}_{'-'.join(sessions)}_output")
+    #sorting = si.run_sorter(recording=pp_recording, **protocol_info['sorting'], remove_existing_folder=True, verbose=True, folder=f"M{mouse}_D{day}_{protocol}_{'-'.join(sessions)}_output")
+    sorting = si.read_kilosort(f"M{mouse}_D{day}_{protocol}_{'-'.join(sessions)}_output")
 
     analyzer = si.create_sorting_analyzer(
         recording=si.apply_preprocessing_pipeline(recording, protocol_info['preprocessing_for_analyzer']), 
