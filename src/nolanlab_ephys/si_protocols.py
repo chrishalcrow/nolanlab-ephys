@@ -8,15 +8,17 @@ protocols = {
 
     'kilosort4A': {
         'preprocessing': {
+            'depth_order': {},
             'detect_and_remove_bad_channels': {'seed': 1205},
             'phase_shift': {},
         },
         'sorting': {
             'sorter_name': 'kilosort4',
             'do_correction': False,
-            'use_binary_file': False,
+            'use_binary_file': True,
         },
         'preprocessing_for_analyzer': {
+            'depth_order': {},
             'detect_and_remove_bad_channels': {'seed': 1205},
             'phase_shift': {},
             'common_reference': {},

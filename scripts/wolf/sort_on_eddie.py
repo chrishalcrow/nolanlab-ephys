@@ -43,7 +43,10 @@ active_projects_path = eddie_active_projects
 
 stagein_dict = {}
 for recording_path in recording_paths:
-    stagein_dict[f"{active_projects_path / recording_path}"] = data_folder
+    if "OF1" in str(recording_path.name):
+        stagein_dict[f"{active_projects_path / recording_path}"] = data_folder / "OF"
+    else:
+        stagein_dict[f"{active_projects_path / recording_path}"] = data_folder / "VR"
 
 stageout_dict = {}
 for session in sessions:
