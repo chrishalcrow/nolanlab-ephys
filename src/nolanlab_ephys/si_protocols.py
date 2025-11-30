@@ -147,7 +147,7 @@ def compute_automated_curation(analyzer, model_path, curation_output_path):
     )
     more_potential_merges = si.compute_merge_unit_groups(
         analyzer.select_units(list(unitrefine_labels.query('prediction == "good"').index)),
-        preset="temporal_splits"
+        preset="temporal_splits",
         resolve_graph=False,
     )
 
