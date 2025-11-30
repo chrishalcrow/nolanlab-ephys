@@ -8,17 +8,15 @@ protocols = {
 
     'kilosort4A': {
         'preprocessing': {
-            'depth_order': {},
             'detect_and_remove_bad_channels': {'seed': 1205},
             'phase_shift': {},
         },
         'sorting': {
             'sorter_name': 'kilosort4',
             'do_correction': False,
-            'use_binary_file': True,
+            'use_binary_file': False,
         },
         'preprocessing_for_analyzer': {
-            'depth_order': {},
             'detect_and_remove_bad_channels': {'seed': 1205},
             'phase_shift': {},
             'common_reference': {},
@@ -144,11 +142,13 @@ def compute_automated_curation(analyzer, model_path, curation_output_path):
 
     potential_merges = si.compute_merge_unit_groups(
         analyzer.select_units(list(unitrefine_labels.query('prediction == "good"').index)),
-        preset='x_contaminations'
+        preset='x_contaminations',
+        resolve_graph=False,
     )
     more_potential_merges = si.compute_merge_unit_groups(
         analyzer.select_units(list(unitrefine_labels.query('prediction == "good"').index)),
         preset="temporal_splits"
+        resolve_graph=False,
     )
 
     final_merges = resolve_merging_graph(analyzer.sorting, potential_merges + more_potential_merges)

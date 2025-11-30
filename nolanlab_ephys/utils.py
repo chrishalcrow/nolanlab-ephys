@@ -29,7 +29,7 @@ def get_recording_folders(data_folder, mouse, day):
     if len(list(Path(data_folder).glob('data/')))>0:
         data_path += 'data/'
 
-    session_types = ['of', 'vr', 'vr_multi_context', 'allen_brain_observatory_visual_sequences', 'allen_brain_observatory_visual_multi_sequences', 'allen_brain_observatory_visual_coding', 'dvd_waitscreen']
+    session_types = ['OF', 'VR', 'of', 'vr', 'vr_multi_context', 'allen_brain_observatory_visual_sequences', 'allen_brain_observatory_visual_multi_sequences', 'allen_brain_observatory_visual_coding', 'dvd_waitscreen']
 
     recording_folders = []
     for session_type in session_types:

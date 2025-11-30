@@ -30,7 +30,7 @@ def main():
 
     data_folder = parser.parse_args().data_folder
     if data_folder is None:
-        data_folder = "/home/nolanlab/Work/Harry_Project/data/"
+        data_folder = "/home/nolanlab/Work/Harry_Project/data/VR/"
     data_folder = Path(data_folder)
 
     deriv_folder = parser.parse_args().deriv_folder
@@ -58,7 +58,7 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
 
     concatenated_recording = si.concatenate_recordings(recordings)
 
-    pp_recording = si.apply_preprocessing_pipeline(concatenated_recording.split_by('group'), protocol_info['preprocessing'])
+    pp_recording = si.apply_preprocessing_pipeline(concatenated_recording, protocol_info['preprocessing'])
 
     sorting = si.run_sorter(recording=pp_recording, **protocol_info['sorting'], remove_existing_folder=True, verbose=True, folder=f"M{mouse}_D{day}_{protocol}_{'-'.join(sessions)}_output")
     
@@ -76,7 +76,7 @@ def do_sorting_pipeline(mouse, day, sessions, data_folder, deriv_folder, protoco
         cumulative_samples += recording_total_samples
 
         analyzer = si.create_sorting_analyzer(
-            recording=si.apply_preprocessing_pipeline(recording.split_by('group'), protocol_info['preprocessing_for_analyzer']), 
+            recording=si.apply_preprocessing_pipeline(recording, protocol_info['preprocessing_for_analyzer']), 
             sorting=one_sorting, 
             folder = deriv_folder / f"M{mouse:02d}/D{day:02d}/{session}/{protocol}/sub-{mouse:02d}_day-{day:02d}_ses-{session}_srt-{protocol}_analyzer",
             format = "zarr",
