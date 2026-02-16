@@ -37,7 +37,6 @@ def main():
     do_sorting(mouse, day, session_names, protocol, data_folder, deriv_folder)
 
 
-
 def do_sorting(mouse, day, session_names, protocol, data_folder, deriv_folder):
 
     junji_sessions = [JunjiSession(mouse, day, session_name, data_folder) for session_name in session_names]
@@ -51,7 +50,7 @@ def do_sorting(mouse, day, session_names, protocol, data_folder, deriv_folder):
     for removed_channels_rec in removed_channels_recs.values():
         good_channel_ids = np.concat([good_channel_ids, removed_channels_rec.channel_ids])
 
-    sorting = si.run_sorter("mountainsort5", removed_channels_recs, verbose=True, remove_existing_folder=True, detect_threshold = 5.0)
+    sorting = si.run_sorter("mountainsort5", removed_channels_recs, verbose=True, remove_existing_folder=True, detect_threshold = 5.0, folder=f"M{mouse}_D{day}_mountainsort_ouput")
 
     cumulative_samples = 0
     for rec, session_name in zip(recs, session_names):
