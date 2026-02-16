@@ -1,4 +1,4 @@
-,mouse,day,session_type,ephys_folder
+,mouse,day,session,filepath
 0,1,1,openfield,Junji/Data/2021cohort1/openfield/M1_D1_2021-01-11_14-56-02
 1,1,1,vr,Junji/Data/2021cohort1/vr/M1_D1_2021-01-11_14-01-52
 2,1,2,openfield,Junji/Data/2021cohort1/openfield/M1_D2_2021-01-12_14-12-09
