@@ -25,12 +25,12 @@ protocol = parser.parse_args().protocol
 
 data_folder = parser.parse_args().data_folder
 if data_folder is None:
-    data_folder = eddie_wolf_data_folder
+    data_folder = eddie_junji_data_folder
 data_folder = Path(data_folder)
 
 deriv_folder = parser.parse_args().deriv_folder
 if deriv_folder is None:
-    deriv_folder = eddie_wolf_deriv_folder
+    deriv_folder = eddie_junji_deriv_folder
 deriv_folder = Path(deriv_folder)
 
 email = parser.parse_args().email
