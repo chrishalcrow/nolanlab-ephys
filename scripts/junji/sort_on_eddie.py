@@ -2,7 +2,7 @@ from eddie_helper.make_scripts import run_python_script, run_stage_script
 from argparse import ArgumentParser
 from pathlib import Path
 from nolanlab_ephys.eddie import filepath_from_mouse_day_sessions
-from nolanlab_ephys.common_paths import  eddie_active_projects, eddie_wolf_data_folder, eddie_wolf_deriv_folder
+from nolanlab_ephys.common_paths import  eddie_active_projects, eddie_junji_data_folder, eddie_junji_deriv_folder
 import os
 
 parser = ArgumentParser()
@@ -60,5 +60,5 @@ uv_directory = os.getcwd()
 python_arg = f"scripts/junji/sort_on_comp.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
 
 run_stage_script(stagein_dict, job_name=stagein_job_name)
-run_python_script(uv_directory, python_arg, cores=8, email=email, staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
+run_python_script(uv_directory, python_arg, cores=4, email=email, staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
 run_stage_script(stageout_dict, job_name=stageout_job_name, hold_jid=run_python_name)
