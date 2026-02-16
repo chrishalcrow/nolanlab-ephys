@@ -60,5 +60,5 @@ uv_directory = os.getcwd()
 python_arg = f"scripts/junji/sort_on_comp.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
 
 run_stage_script(stagein_dict, job_name=stagein_job_name)
-run_python_script(uv_directory, python_arg, cores=4, email=email, staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
+run_python_script(uv_directory, python_arg, cores=4, email=email, staging=False, hold_jid=stagein_job_name, job_name=run_python_name, h_rt="00:29:59")
 run_stage_script(stageout_dict, job_name=stageout_job_name, hold_jid=run_python_name)

@@ -40,8 +40,6 @@ def main():
 
 def do_sorting(mouse, day, session_names, protocol, data_folder, deriv_folder):
 
-    si.set_global_job_kwargs(n_jobs=4)
-
     junji_sessions = [JunjiSession(mouse, day, session_name, data_folder) for session_name in session_names]
 
     recs = [session.get_ephys() for session in junji_sessions]
@@ -94,9 +92,6 @@ def do_sorting(mouse, day, session_names, protocol, data_folder, deriv_folder):
             'quality_metrics': {'metric_names': ['num_spikes', 'firing_rate', 'presence_ratio', 'snr', 'isi_violation', 'rp_violation', 'sliding_rp_violation', 'synchrony', 'firing_range', 'amplitude_cv', 'amplitude_cutoff', 'noise_cutoff', 'amplitude_median', 'drift', 'sd_ratio', 'mahalanobis', 'd_prime', 'nearest_neighbor', 'silhouette', 'nn_advanced']},
             'template_metrics': {'include_multi_channel_metrics': False},
         })
-
-    for temp_rec_path in temp_rec_paths:
-        shutil.rmtree(temp_rec_path)
 
 if __name__ == "__main__":
     main()
