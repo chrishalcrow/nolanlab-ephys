@@ -50,7 +50,7 @@ for recording_path in recording_paths:
 
 stageout_dict = {}
 for session in sessions:
-    stageout_dict[deriv_folder / f"M{mouse:02d}/D{day:02d}/{session}/{protocol}"] = eddie_active_projects / "Chris/Junji/derivatives" / f"M{mouse:02d}/D{day:02d}/{session}/"
+    stageout_dict[deriv_folder / f"M{mouse:02d}/D{day:02d}"] = eddie_active_projects / "Chris/Junji/derivatives" / f"M{mouse:02d}"
 
 stagein_job_name = f"M{mouse}D{day}{sessions[0][:2]}in" 
 run_python_name = f"M{mouse}D{day}{sessions[0][:2]}run"
