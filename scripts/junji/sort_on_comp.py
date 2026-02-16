@@ -21,7 +21,7 @@ def main():
         data_folder = "/run/user/1000/gvfs/smb-share:server=cmvm.datastore.ed.ac.uk,share=cmvm/sbms/groups/CDBS_SIDB_storage/NolanLab/ActiveProjects/Junji/Data/"
     data_folder = Path(data_folder)
 
-    deriv_folder = parser.parse_args().data_folder
+    deriv_folder = parser.parse_args().deriv_folder
     if deriv_folder is None:
         deriv_folder = "/home/nolanlab/Work/Yiming_Project/Junji/derivatives"
     deriv_folder = Path(deriv_folder)
