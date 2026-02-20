@@ -68,7 +68,7 @@ def do_sorting(mouse, day, session_names, protocol, data_folder, deriv_folder):
         analyzer = si.create_sorting_analyzer(
             recording=si.bandpass_filter(rec.split_by('group')), 
             sorting=one_sorting, 
-            folder = mouseday_deriv_folder / f"sub-{mouse:02d}_day-{day:02d}_ses-{session_name}_srt-{protocol}_analyzer",
+            folder = mouseday_deriv_folder / f"sub-{(mouse+10):02d}_day-{day:02d}_ses-{session_name}_srt-{protocol}_analyzer",
             format = "binary_folder",
             peak_sign = "both",
             radius_um = 70,
