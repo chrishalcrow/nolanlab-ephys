@@ -74,6 +74,10 @@ def do_sorting(mouse, day, session_names, protocol, data_folder, deriv_folder):
             radius_um = 70,
         )
 
+        spikes_per_unit = analyzer.sorting.count_num_spikes_per_unit()
+        units_with_spikes = [unit_id for unit_id, num_spikes in spikes_per_unit.items() if num_spikes != 0]
+        analyzer = analyzer.select_units(units_with_spikes)
+
         analyzer.compute({
             'noise_levels': {},
             'unit_locations': {},
