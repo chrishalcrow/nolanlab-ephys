@@ -1,3 +1,4 @@
+import os
 from eddie_helper.make_scripts import run_python_script, run_stage_script
 from argparse import ArgumentParser
 from pathlib import Path
