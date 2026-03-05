@@ -116,6 +116,7 @@ generic_postprocessing = {
     'waveforms': {},
     'templates': {},
     'spike_amplitudes': {'peak_sign': 'both'},
+    'amplitude_scalings': {},
     'isi_histograms': {},
     'spike_locations': {'peak_sign': 'both'},
     'correlograms': {},

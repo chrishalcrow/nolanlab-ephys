@@ -1,3 +1,5 @@
+import subprocess
+
 import spikeinterface.full as si
 
 import pandas as pd
@@ -50,16 +52,20 @@ for recording, sortings, typ in zip(recordings, sortings, typs):
     # we do all our syncing assuming that t=0 is at the start of the ephys data
     recording._recording_segments[0].t_start = 0
 
+    analyzer_folder = deriv_folder / f"M{mouse:02d}/D{day:02d}/{typ.lower()}/kilosort4/sub-{mouse:02d}_ses-{day:02d}_typ-{typ}_srt-kilosort4_analyzer"
+
     analyzer = si.create_sorting_analyzer(
         recording=recording,
         sorting=sorting, 
-        folder = deriv_folder / f"M{mouse:02d}/D{day:02d}/{typ}/kilosort4/sub-{mouse:02d}_ses-{day:02d}_typ-{typ}_srt-kilosort4_analyzer",
+        folder = analyzer_folder,
         format = "zarr",
         peak_sign = "both",
         radius_um = 70,
     )
 
     analyzer.compute(generic_postprocessing)
+
+    subprocess.run(["rm", "-r", str(analyzer_folder / "extensions/waveforms")]) 
 
 #recording = get_chrono_concat_recording(data_folder=data_folder, mouse =mouse, day=day)
 #recording = si.aggregate_channels(recording.split_by('group'))
