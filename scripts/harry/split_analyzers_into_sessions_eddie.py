@@ -29,7 +29,7 @@ deriv_folder = Path(deriv_folder)
 
 for day in days:
 
-    recording_paths = filepath_from_mouse_day_sessions(mouse, day)
+    recording_paths = filepath_from_mouse_day_sessions(mouse, day, path_to_all_filepaths="scripts/harry/harry_filepaths.csv")
     active_projects_path = eddie_active_projects
 
     stagein_dict = {}
