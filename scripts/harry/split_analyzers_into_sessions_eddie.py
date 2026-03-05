@@ -2,7 +2,7 @@ from eddie_helper.make_scripts import run_python_script, run_stage_script
 from argparse import ArgumentParser
 from pathlib import Path
 from nolanlab_ephys.eddie import filepath_from_mouse_day_sessions
-from nolanlab_ephys.common_paths import  eddie_active_projects, eddie_data_folder, eddie_deriv_folder
+from nolanlab_ephys.common_paths import  eddie_active_projects, eddie_harry_data_folder, eddie_harry_deriv_folder
 import subprocess
 
 parser = ArgumentParser()
@@ -19,12 +19,12 @@ days = [int(x) for x in days_string.split(',')]
 
 data_folder = parser.parse_args().data_folder
 if data_folder is None:
-    data_folder = eddie_data_folder
+    data_folder = eddie_harry_data_folder
 data_folder = Path(data_folder)
 
 deriv_folder = parser.parse_args().deriv_folder
 if deriv_folder is None:
-    deriv_folder = eddie_deriv_folder
+    deriv_folder = eddie_harry_deriv_folder
 deriv_folder = Path(deriv_folder)
 
 for day in days:
