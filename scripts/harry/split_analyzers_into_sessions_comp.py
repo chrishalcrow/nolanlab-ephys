@@ -18,7 +18,7 @@ day = int(parser.parse_args().day)
 
 si.set_global_job_kwargs(n_jobs=8)
 
-analyzer_path = deriv_folder / f"M{mouse}/D{day}/full/kilosort4/kilosort4_sa"
+analyzer_path = deriv_folder / f"M{mouse}/D{day}/full/kilosort4/sub-{mouse}_ses-{day}_srt-kilosort4_full_analyzer.zarr"
 analyzer = si.load_sorting_analyzer(analyzer_path)
 
 #recording = get_chrono_concat_recording(data_folder=data_folder, mouse =mouse, day=day)
