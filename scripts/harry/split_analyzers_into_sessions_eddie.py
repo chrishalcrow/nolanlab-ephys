@@ -47,7 +47,7 @@ for day in days:
     #stageout_job_name = f"M{mouse}D{day}out" 
 
     uv_directory = os.getcwd()
-    python_arg = f"$HOME/.local/bin/uv run /exports/eddie/scratch/chalcrow/harry/fromgit/nolanlab-ephys/scripts/harry/split_analyzers_into_sessions_comp.py {mouse} {day}"
+    python_arg = f"$HOME/.local/bin/uv run /exports/eddie/scratch/chalcrow/harry/code/nolanlab-ephys/scripts/harry/split_analyzers_into_sessions_comp.py {mouse} {day}"
 
     run_stage_script(stagein_dict, job_name=stagein_job_name)
     run_python_script(uv_directory, python_arg, cores=8, email="chalcrow@ed.ac.uk", staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
