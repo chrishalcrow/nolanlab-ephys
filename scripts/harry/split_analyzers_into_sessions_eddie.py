@@ -36,7 +36,7 @@ for day in days:
     for recording_path in recording_paths:
         stagein_dict[f"{active_projects_path / recording_path}"] = data_folder
     stagein_dict[eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/full/kilosort4/kilosort4_sa"] = deriv_folder /  f"M{mouse}/D{day}/full/kilosort4/kilosort4_sa"
-    subprocess.run(['mkdir', '-p', str(deriv_folder /  f"M{mouse}/D{day}/full/kilosort4/") ])
+    subprocess.run(['mkdir', '-p', str(deriv_folder /  f"M{mouse}/D{day}/full/kilosort4/sub-{mouse}_ses-{day}_srt-kilosort4_full_analyzer.zarr") ])
 
     # stageout_dict = {}
     # stageout_dict[deriv_folder / f"M{mouse}/D{day}/full/kilosort4/sub-{mouse}_ses-{day}_srt-kilosort4_full_analyzer.zarr"] = eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/full/kilosort4/"
