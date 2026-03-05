@@ -117,7 +117,7 @@ generic_postprocessing = {
     'templates': {},
     'spike_amplitudes': {'peak_sign': 'both'},
     'isi_histograms': {},
-    'spike_locations': {'spike_retriver_kwargs': {'peak_sign': 'both'}},
+    'spike_locations': {'peak_sign': 'both'},
     'correlograms': {},
     'template_similarity': {'method': 'l2'},
     'quality_metrics': {},# {'metric_names': ['num_spikes', 'firing_rate', 'presence_ratio', 'snr', 'isi_violation', 'rp_violation', 'sliding_rp_violation', 'amplitude_cutoff', 'amplitude_median', 'amplitude_cv', 'synchrony', 'firing_range', 'drift', 'sd_ratio'], 'metric_params': {'snr': {'peak_sign': 'both'}, 'amplitude_cutoff': {'peak_sign': 'both'}, 'amplitude_median': {'peak_sign': 'both'}}},
