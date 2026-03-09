@@ -5,7 +5,6 @@ import spikeinterface.full as si
 import pandas as pd
 from nolanlab_ephys.si_protocols import generic_postprocessing
 from pathlib import Path
-import numpy as np
 from argparse import ArgumentParser
 
 data_folder = Path("/exports/eddie/scratch/chalcrow/harry/data/")
@@ -47,12 +46,12 @@ sortings = [of1_sorting, vr_sorting, of2_sorting]
 recordings = [of1_recording, vr_recording, of2_recording]
 typs = ['OF1', 'VR', 'OF2']
 
-for recording, sortings, typ in zip(recordings, sortings, typs):
+for recording, sorting, typ in zip(recordings, sortings, typs):
 
     # we do all our syncing assuming that t=0 is at the start of the ephys data
     recording._recording_segments[0].t_start = 0
 
-    analyzer_folder = deriv_folder / f"M{mouse:02d}/D{day:02d}/{typ.lower()}/kilosort4/sub-{mouse:02d}_ses-{day:02d}_typ-{typ}_srt-kilosort4_analyzer"
+    analyzer_folder = deriv_folder / f"M{mouse:02d}/D{day:02d}/{typ.lower()}/kilosort4/sub-M{mouse:02d}_ses-D{day:02d}_typ-{typ}_srt-kilosort4_analyzer"
 
     analyzer = si.create_sorting_analyzer(
         recording=recording,
@@ -66,47 +65,3 @@ for recording, sortings, typ in zip(recordings, sortings, typs):
     analyzer.compute(generic_postprocessing)
 
     subprocess.run(["rm", "-r", str(analyzer_folder / "extensions/waveforms")]) 
-
-#recording = get_chrono_concat_recording(data_folder=data_folder, mouse =mouse, day=day)
-#recording = si.aggregate_channels(recording.split_by('group'))
-
-# pp_rec = si.common_reference(si.bandpass_filter(recording))
-
-# old_channel_locations = analyzer.get_channel_locations()
-# all_channel_locations = recording.get_channel_locations()
-
-# old_channel_ids = []
-# for channel_id, channel_locations in zip(recording.get_channel_ids(), recording.get_channel_locations()):
-#     if 2 in np.sum(channel_locations == old_channel_locations, axis=1):
-#         old_channel_ids.append(channel_id)
-
-# analyzer._recording = pp_rec.select_channels(old_channel_ids)
-
-# from copy import deepcopy
-# new_analyzer = analyzer.save_as(format="memory")
-# all_extensions = deepcopy(new_analyzer.extensions)
-# for extension_name in all_extensions:
-#    new_analyzer.delete_extension(extension_name)
-
-# new_analyzer.sorting = si.remove_excess_spikes(new_analyzer.sorting, new_analyzer._recording)
-
-# new_sparsity = si.estimate_sparsity(new_analyzer.sorting, new_analyzer._recording, peak_sign="both", radius_um=70)
-# new_analyzer.sparsity = new_sparsity
-
-# new_analyzer.compute({
-#     'unit_locations': {},
-#     'random_spikes': {},
-#     'noise_levels': {},
-#     'waveforms': {},
-#     'templates': {},
-#     'spike_amplitudes': {'peak_sign': 'both'},
-#     'isi_histograms': {},
-#     'spike_locations': {'spike_retriver_kwargs': {'peak_sign': 'both'}},
-#     'correlograms': {},
-#     'template_similarity': {'method': 'l2'},
-#     'quality_metrics': {'metric_names': ['num_spikes', 'firing_rate', 'presence_ratio', 'snr', 'isi_violation', 'rp_violation', 'sliding_rp_violation', 'amplitude_cutoff', 'amplitude_median', 'amplitude_cv', 'synchrony', 'firing_range', 'drift', 'sd_ratio'], 'metric_params': {'snr': {'peak_sign': 'both'}, 'amplitude_cutoff': {'peak_sign': 'both'}, 'amplitude_median': {'peak_sign': 'both'}}},
-#     'template_metrics': {'include_multi_channel_metrics': True, 'peak_sign': 'both'},
-# })
-
-# new_analyzer_path = deriv_folder / f"M{mouse}/D{day}/full/kilosort4/sub-{mouse}_ses-{day}_srt-kilosort4_full_analyzer"
-# new_analyzer.save_as(folder=new_analyzer_path, format="zarr")

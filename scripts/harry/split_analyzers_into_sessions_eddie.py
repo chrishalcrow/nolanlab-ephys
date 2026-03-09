@@ -39,17 +39,18 @@ for day in days:
     stagein_dict[eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/full/kilosort4/sub-{mouse}_ses-{day}_srt-kilosort4_full_analyzer.zarr"] = deriv_folder /  f"M{mouse}/D{day}/full/kilosort4/"
     subprocess.run(['mkdir', '-p', str(deriv_folder /  f"M{mouse}/D{day}/full/kilosort4/") ])
 
-    # stageout_dict = {}
-    # stageout_dict[deriv_folder / f"M{mouse}/D{day}/full/kilosort4/sub-{mouse}_ses-{day}_srt-kilosort4_full_analyzer.zarr"] = eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/full/kilosort4/"
-
+    stageout_dict = {}
+    stageout_dict[str(deriv_folder / f"M{mouse}/D{day}/of1/kilosort4/sub-M{mouse}_ses-D{day}_srt-kilosort4_full_analyzer.zarr")] = eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/of1/kilosort4/"
+    stageout_dict[str(deriv_folder / f"M{mouse}/D{day}/vr/kilosort4/sub-M{mouse}_ses-D{day}_srt-kilosort4_full_analyzer.zarr")] = eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/vr/kilosort4/"
+    stageout_dict[str(deriv_folder / f"M{mouse}/D{day}/of2/kilosort4/sub-M{mouse}_ses-D{day}_srt-kilosort4_full_analyzer.zarr")] = eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/of2/kilosort4/"
+    
     stagein_job_name = f"M{mouse}D{day}in" 
     run_python_name = f"M{mouse}D{day}run"
-    #stageout_job_name = f"M{mouse}D{day}out" 
+    stageout_job_name = f"M{mouse}D{day}out" 
 
     uv_directory = os.getcwd()
     python_arg = f"$HOME/.local/bin/uv run /exports/eddie/scratch/chalcrow/harry/code/nolanlab-ephys/scripts/harry/split_analyzers_into_sessions_comp.py {mouse} {day}"
 
     run_stage_script(stagein_dict, job_name=stagein_job_name)
     run_python_script(uv_directory, python_arg, cores=8, email="chalcrow@ed.ac.uk", staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
-
-    #run_stage_script(stageout_dict, job_name=stageout_job_name, hold_jid=run_python_name)
+    run_stage_script(stageout_dict, job_name=stageout_job_name, hold_jid=run_python_name)
