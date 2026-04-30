@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 from pathlib import Path
-from nolanlab_ephys.utils import get_recording_folders, chronologize_paths
+from nolanlab_ephys.lab_utils import get_recording_folders, chronologize_paths
 from nolanlab_ephys.sort import do_sorting_pipeline_concat_then_split
 
 import spikeinterface.full as si
