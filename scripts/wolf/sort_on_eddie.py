@@ -1,10 +1,20 @@
 from eddie_helper.make_scripts import run_python_script, run_stage_script
 from argparse import ArgumentParser
 from pathlib import Path
-from nolanlab_ephys.eddie import filepath_from_mouse_day_sessions
-from nolanlab_ephys.common_paths import  eddie_active_projects, eddie_wolf_data_folder, eddie_wolf_deriv_folder
+from ..common_paths import  eddie_active_projects, eddie_wolf_data_folder, eddie_wolf_deriv_folder
 import os
+import pandas as pd
 
+def filepath_from_mouse_day_sessions(mouse, day, sessions, path_to_all_filepaths):
+    
+    all_filepaths = pd.read_csv(path_to_all_filepaths)
+    sessions_filepaths = []
+    
+    for session in sessions:
+        session_column = all_filepaths.query(f'mouse == {mouse} & day == {day} & session == "{session}"')
+        filepath = session_column['filepath'].values[0]
+        sessions_filepaths.append(filepath)
+    
 parser = ArgumentParser()
 
 parser.add_argument('mouse')
@@ -38,7 +48,7 @@ if email is None:
     email = "chalcrow@ed.ac.uk"
 
 path_to_all_filepaths = "scripts/wolf/wolf_filepaths.csv"
-recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions=None, path_to_all_filepaths=path_to_all_filepaths)
+recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions=sessions, path_to_all_filepaths=path_to_all_filepaths)
 active_projects_path = eddie_active_projects
 
 stagein_dict = {}
