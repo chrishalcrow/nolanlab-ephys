@@ -17,5 +17,5 @@ chris_laptop_active_projects = Path(
     "/Volumes/cmvm/sbms/groups/CDBS_SIDB_storage/NolanLab/ActiveProjects"
 )
 
-eddie_teris_data_folder = Path('/exports/eddie/scratch/chalcrow/junji/raw')
-eddie_teris_deriv_folder = Path('/exports/eddie/scratch/chalcrow/junji/derivatives')
+eddie_junji_data_folder = Path('/exports/eddie/scratch/chalcrow/junji/raw')
+eddie_junji_deriv_folder = Path('/exports/eddie/scratch/chalcrow/junji/derivatives')
