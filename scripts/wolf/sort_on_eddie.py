@@ -1,7 +1,7 @@
 from eddie_helper.make_scripts import run_python_script, run_stage_script
 from argparse import ArgumentParser
 from pathlib import Path
-from ..common_paths import  eddie_active_projects, eddie_wolf_data_folder, eddie_wolf_deriv_folder
+from common_paths import  eddie_active_projects, eddie_wolf_data_folder, eddie_wolf_deriv_folder
 import os
 import pandas as pd
 

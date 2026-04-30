@@ -19,15 +19,3 @@ chris_laptop_active_projects = Path(
 
 eddie_wolf_data_folder = Path('/exports/eddie/scratch/chalcrow/wolf/raw')
 eddie_wolf_deriv_folder = Path('/exports/eddie/scratch/chalcrow/wolf/derivatives')
-
-eddie_harry_data_folder = Path('/exports/eddie/scratch/chalcrow/harry/raw')
-eddie_harry_deriv_folder = Path('/exports/eddie/scratch/chalcrow/harry/derivatives')
-
-eddie_bri_data_folder = Path('/exports/eddie/scratch/chalcrow/bri/raw')
-eddie_bri_deriv_folder = Path('/exports/eddie/scratch/chalcrow/bri/derivatives')
-
-eddie_junji_data_folder = Path('/exports/eddie/scratch/chalcrow/junji/raw')
-eddie_junji_deriv_folder = Path('/exports/eddie/scratch/chalcrow/junji/derivatives')
-
-eddie_teris_data_folder = Path('/exports/eddie/scratch/chalcrow/teris/raw')
-eddie_teris_deriv_folder = Path('/exports/eddie/scratch/chalcrow/teris/derivatives')
