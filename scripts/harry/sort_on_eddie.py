@@ -19,8 +19,8 @@ def filepath_from_mouse_day_sessions(mouse, day, sessions, path_to_all_filepaths
 
 parser = ArgumentParser()
 
-parser.add_argument('mouse')
-parser.add_argument('day')
+parser.add_argument('mouse', type=int)
+parser.add_argument('day', type=int)
 parser.add_argument('sessions')
 parser.add_argument('protocol')
 parser.add_argument('--data_folder', default=None)
@@ -50,7 +50,7 @@ if email is None:
     email = "chalcrow@ed.ac.uk"
 
 path_to_all_filepaths = "scripts/harry/harry_filepaths.csv"
-recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions=None, path_to_all_filepaths=path_to_all_filepaths)
+recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions=sessions, path_to_all_filepaths=path_to_all_filepaths)
 active_projects_path = eddie_active_projects
 
 stagein_dict = {}
