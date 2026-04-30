@@ -20,14 +20,14 @@ def filepath_from_mouse_day_sessions(mouse, day, sessions, path_to_all_filepaths
 parser = ArgumentParser()
 
 parser.add_argument('mouse', type=int)
-parser.add_argument('days', type=int)
+parser.add_argument('days')
 parser.add_argument('sessions')
 parser.add_argument('protocol')
 parser.add_argument('--data_folder', default=None)
 parser.add_argument('--deriv_folder', default=None)
 parser.add_argument('--email', default=None)
 
-mouse = int(parser.parse_args().mouse)
+mouse = parser.parse_args().mouse
 
 days_string = parser.parse_args().days
 days = days_string.split(',')
