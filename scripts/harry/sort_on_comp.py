@@ -10,6 +10,7 @@ def main():
 
     parser.add_argument('mouse')
     parser.add_argument('day')
+    parser.add_argument('sessions')
     parser.add_argument('protocol')
     parser.add_argument('--n_jobs', default=8)
     parser.add_argument('--data_folder', default=None)
@@ -19,6 +20,9 @@ def main():
     day = int(parser.parse_args().day)
     protocol = parser.parse_args().protocol
     n_jobs = parser.parse_args().n_jobs
+
+    sessions_string = parser.parse_args().sessions
+    sessions = sessions_string.split(',')   
 
     data_folder = parser.parse_args().data_folder
     if data_folder is None:
@@ -30,8 +34,8 @@ def main():
         deriv_folder = "/home/nolanlab/Work/Harry_Project/derivatives/"
     deriv_folder = Path(deriv_folder)
 
-    recording_paths = chronologize_paths(get_recording_folders(data_folder=data_folder, mouse =mouse, day=day))
-    print(f"\nWill sort the following recordings:")
+    recording_paths = chronologize_paths(get_recording_folders(data_folder=data_folder, mouse =mouse, day=day, sessions=sessions))
+    print("\nWill sort the following recordings:")
     for recording_path in recording_paths:
         print(f"  - {recording_path}")
 
