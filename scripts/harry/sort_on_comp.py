@@ -1,11 +1,7 @@
 from argparse import ArgumentParser
 from pathlib import Path
-from nolanlab_ephys.si_protocols import protocols
-from nolanlab_ephys.utils import get_recording_folders, chronologize_paths
-from nolanlab_ephys.si_protocols import generic_postprocessing
+from nolanlab_ephys.lab_utils import get_recording_folders, chronologize_paths
 from nolanlab_ephys.sort import do_sorting_pipeline_concat
-
-
 import spikeinterface.full as si
 
 def main():
