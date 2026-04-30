@@ -19,8 +19,8 @@ def filepath_from_mouse_day_sessions(mouse, day, sessions, path_to_all_filepaths
 
 parser = ArgumentParser()
 
-parser.add_argument('mouse')
-parser.add_argument('days')
+parser.add_argument('mouse', type=int)
+parser.add_argument('days', type=int)
 parser.add_argument('sessions')
 parser.add_argument('protocol')
 parser.add_argument('--data_folder', default=None)
@@ -54,11 +54,9 @@ if email is None:
 
 path_to_all_filepaths = "scripts/teris/resources/all_mouseday_ephys_paths.csv"
 
-print(days)
-
 for day in days:
 
-    recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions=None, path_to_all_filepaths=path_to_all_filepaths)
+    recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions=sessions, path_to_all_filepaths=path_to_all_filepaths)
     active_projects_path = eddie_active_projects
 
     stagein_dict = {}
