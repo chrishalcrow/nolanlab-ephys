@@ -21,7 +21,7 @@ def filepath_from_mouse_day_sessions(mouse, day, sessions, path_to_all_filepaths
 parser = ArgumentParser()
 
 parser.add_argument('mouse')
-parser.add_argument('days')
+parser.add_argument('dates')
 parser.add_argument('sessions')
 parser.add_argument('protocol')
 parser.add_argument('--data_folder', default=None)
@@ -30,9 +30,8 @@ parser.add_argument('--email', default=None)
 
 mouse = int(parser.parse_args().mouse)
 
-days_string = parser.parse_args().days
-days = days_string.split(',')
-days = [int(day) for day in days]
+dates_string = parser.parse_args().days
+dates = dates_string.split(',')
 
 sessions_string = parser.parse_args().sessions
 sessions = sessions_string.split(',')
@@ -55,11 +54,9 @@ if email is None:
 
 path_to_all_filepaths = "scripts/bri/resources/all_mouseday_ephys_paths.csv"
 
-print(days)
+for date in dates:
 
-for day in days:
-
-    recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions=None, path_to_all_filepaths=path_to_all_filepaths)
+    recording_paths = filepath_from_mouse_day_sessions(mouse, date, sessions=None, path_to_all_filepaths=path_to_all_filepaths)
     active_projects_path = eddie_active_projects
 
     stagein_dict = {}
@@ -71,14 +68,14 @@ for day in days:
 
     stageout_dict = {}
     for session in sessions:
-        stageout_dict[deriv_folder / f"M{mouse:02d}/D{day:02d}"] = eddie_active_projects / "Chris/bri/derivatives" / f"M{(mouse+10):02d}"
+        stageout_dict[deriv_folder / f"M{mouse:02d}/{date}"] = eddie_active_projects / "Chris/bri/derivatives" / f"M{(mouse+10):02d}"
 
-    stagein_job_name = f"M{mouse}D{day}{sessions[0][:2]}in" 
-    run_python_name = f"M{mouse}D{day}{sessions[0][:2]}run"
-    stageout_job_name = f"M{mouse}D{day}{sessions[0][:2]}out" 
+    stagein_job_name = f"M{mouse}D{date}{sessions[0][:2]}in" 
+    run_python_name = f"M{mouse}D{date}{sessions[0][:2]}run"
+    stageout_job_name = f"M{mouse}D{date}{sessions[0][:2]}out" 
 
     uv_directory = os.getcwd()
-    python_arg = f"scripts/teris/sort_on_comp.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
+    python_arg = f"scripts/teris/sort_on_comp.py {mouse} {date} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
 
     run_stage_script(stagein_dict, job_name=stagein_job_name)
     run_python_script(uv_directory, python_arg, cores=4, email=email, staging=False, hold_jid=stagein_job_name, job_name=run_python_name, h_rt="00:29:59")
