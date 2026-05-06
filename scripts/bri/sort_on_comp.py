@@ -11,6 +11,7 @@ def main():
 
     parser.add_argument('mouse')
     parser.add_argument('date')
+    parser.add_argument('sessions')
     parser.add_argument('protocol')
     parser.add_argument('--data_folder', default=None)
     parser.add_argument('--deriv_folder', default=None)
