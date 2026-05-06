@@ -57,7 +57,7 @@ def main():
         analyzer_paths,
         protocol,
         sorting_output_folder=f"sorting_output_{mouse}_{date}_{protocol}",
-        n_jobs=8,
+        n_jobs=4,
     )
 
 
