@@ -53,9 +53,12 @@ path_to_all_filepaths = "scripts/harry/harry_filepaths.csv"
 recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions=sessions, path_to_all_filepaths=path_to_all_filepaths)
 active_projects_path = eddie_active_projects
 
-stagein_dict = {}
-for recording_path in recording_paths:
-    stagein_dict[f"{active_projects_path / recording_path}"] = data_folder
+for session_type, recording_path in zip(sessions, recording_paths):
+    if "OF" in session_type:
+        folder_name = "OF"
+    else:
+        folder_name = "VR"
+    stagein_dict[f"{active_projects_path / recording_path }"] = str(data_folder / folder_name) + "/"
 
 stageout_dict = {}
 stageout_dict[deriv_folder / f"M{mouse}/D{day}/{''.join(sessions)}/"] = eddie_active_projects / "Chris/Cohort12/derivatives" / f"M{mouse}/D{day}/"

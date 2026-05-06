@@ -54,8 +54,6 @@ if email is None:
 
 path_to_all_filepaths = "scripts/junji/resources/all_mouseday_ephys_paths.csv"
 
-print(days)
-
 for day in days:
 
     recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions=sessions, path_to_all_filepaths=path_to_all_filepaths)
@@ -64,13 +62,13 @@ for day in days:
     stagein_dict = {}
     for recording_path in recording_paths:
         if "openfield" in str(recording_path):
-            stagein_dict[f"{active_projects_path / recording_path}"] = data_folder / "openfield"
+            stagein_dict[f"{active_projects_path / recording_path}/"] = str(data_folder / "openfield") + "/"
         else:
-            stagein_dict[f"{active_projects_path / recording_path}"] = data_folder / "vr"
+            stagein_dict[f"{active_projects_path / recording_path}/"] = str(data_folder / "vr") + "/"
 
     stageout_dict = {}
     for session in sessions:
-        stageout_dict[deriv_folder / f"M{mouse:02d}/D{day:02d}"] = eddie_active_projects / "Chris/Teris/derivatives" / f"M{mouse:02d}"
+        stageout_dict[deriv_folder / f"M{mouse:02d}/D{day:02d}"] = eddie_active_projects / "Chris/Junji/derivatives" / f"M{mouse:02d}"
 
     stagein_job_name = f"M{mouse}D{day}{sessions[0][:2]}in" 
     run_python_name = f"M{mouse}D{day}{sessions[0][:2]}run"
