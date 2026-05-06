@@ -3,6 +3,7 @@ from pathlib import Path
 import spikeinterface.full as si
 from nolanlab_ephys.lab_utils import get_recording_folders, chronologize_paths
 from nolanlab_ephys.sort import do_sorting_pipeline_concat_then_split
+from nolanlab_ephys.spikeinterface_tools import attach_tetrode_to_recording
 
 
 def main():
@@ -49,9 +50,10 @@ def main():
         print(f"  - {analyzer_path}")
 
     recordings = [si.read_openephys(recording_path, stream_id = "CH") for recording_path in recording_paths]
+    recordings_with_probe = [attach_tetrode_to_recording(recording) for recording in recordings]
 
     do_sorting_pipeline_concat_then_split(
-        recordings,
+        recordings_with_probe,
         analyzer_paths,
         protocol,
         sorting_output_folder=f"sorting_output_{mouse}_{date}_{protocol}",
