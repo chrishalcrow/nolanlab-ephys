@@ -61,10 +61,7 @@ for day in days:
 
     stagein_dict = {}
     for recording_path in recording_paths:
-        if "openfield" in str(recording_path):
-            stagein_dict[f"{active_projects_path / recording_path}/"] = str(data_folder / "openfield") + "/"
-        else:
-            stagein_dict[f"{active_projects_path / recording_path}/"] = str(data_folder / "vr") + "/"
+        stagein_dict[f"{active_projects_path / recording_path}/"] = data_folder / (str(mouse) + "/")
 
     stageout_dict = {}
     for session in sessions:
