@@ -12,7 +12,7 @@ def filepath_from_mouse_day_sessions(mouse, day, sessions, path_to_all_filepaths
     sessions_filepaths = []
     
     for session in sessions:
-        session_column = all_filepaths.query(f'mouse == {mouse} & day == {day} & session == "{session}"')
+        session_column = all_filepaths.query(f'mouse == {mouse} & date == {day} & session == "{session}"')
         filepath = session_column['filepath'].values[0]
         sessions_filepaths.append(filepath)
 
@@ -30,7 +30,7 @@ parser.add_argument('--email', default=None)
 
 mouse = int(parser.parse_args().mouse)
 
-dates_string = parser.parse_args().days
+dates_string = parser.parse_args().dates
 dates = dates_string.split(',')
 
 sessions_string = parser.parse_args().sessions
