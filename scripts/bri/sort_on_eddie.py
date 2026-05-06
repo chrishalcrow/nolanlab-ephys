@@ -12,7 +12,7 @@ def filepath_from_mouse_day_sessions(mouse, day, sessions, path_to_all_filepaths
     sessions_filepaths = []
     
     for session in sessions:
-        session_column = all_filepaths.query(f'mouse == {mouse} & date == {day} & session == "{session}"')
+        session_column = all_filepaths.query(f'mouse == {mouse} & date == "{day}" & session == "{session}"')
         filepath = session_column['filepath'].values[0]
         sessions_filepaths.append(filepath)
 
@@ -56,7 +56,7 @@ path_to_all_filepaths = "scripts/bri/resources/all_mouseday_ephys_paths.csv"
 
 for date in dates:
 
-    recording_paths = filepath_from_mouse_day_sessions(mouse, date, sessions=None, path_to_all_filepaths=path_to_all_filepaths)
+    recording_paths = filepath_from_mouse_day_sessions(mouse, date, sessions=sessions, path_to_all_filepaths=path_to_all_filepaths)
     active_projects_path = eddie_active_projects
 
     stagein_dict = {}
