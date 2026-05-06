@@ -3,7 +3,7 @@ from pathlib import Path
 import spikeinterface.full as si
 from spikeinterface.curation.curation_tools import resolve_merging_graph
 from spikeinterface.curation import validate_curation_dict
-
+from probeinterface import generate_tetrode, combine_probes
 
 """
 Protocols we use for spike sorting. Each protocol has a unique name of the form {sorter_name}{letter}. The protocol consists of three stages
@@ -200,6 +200,24 @@ generic_postprocessing = {
     "quality_metrics": {},
     "template_metrics": {},
 }
+
+def attach_tetrode_to_recording(recording):
+
+    tetrodes = []
+
+    for x_displacement in [0, 200, 400, 600]:
+        tet = generate_tetrode()
+        tet.move([x_displacement, 0])
+        tet.ndim = 2
+        tetrodes.append(tet)
+    probe = combine_probes(tetrodes)
+
+    probe.set_device_channel_indices(range(16))
+
+    recording.set_probe(probe, in_place=True)
+    recording.set_channel_groups([0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3])
+
+    return recording
 
 def check_protocol_dict(protocol_info):
 
