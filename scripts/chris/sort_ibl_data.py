@@ -28,13 +28,15 @@ def main():
 
     analyzer_path = deriv_folder / f"ibl_{protocol}_analyzer_{num}"
 
-    do_sorting_pipeline_concat(
+    analyzer = do_sorting_pipeline_concat(
         recordings,
         analyzer_path,
         protocol,
         sorting_output_folder=f"sorting_output_{protocol}_{num}",
         n_jobs=8,
     )
+
+    analyzer.compute(['principal_components', 'quality_metrics'])
 
 
 if __name__ == "__main__":
