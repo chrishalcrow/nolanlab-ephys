@@ -1,5 +1,11 @@
 from eddie_helper.make_scripts import run_python_script
 import os
+from argparse import ArgumentParser
+
+parser = ArgumentParser()
+parser.add_argument('protocol')
+protocol = parser.parse_args().protocol
+
 protocol = "lupinB"
 
 uv_directory = os.getcwd()

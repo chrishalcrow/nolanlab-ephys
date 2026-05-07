@@ -4,31 +4,37 @@ Sorts the IBL data from
 For a variety of sorting protocols.
 """
 
+import random
 from pathlib import Path
-from nolanlab_ephys.sort import do_sorting_pipeline_concat
+from argparse import ArgumentParser
 
 import spikeinterface.full as si
 
+from nolanlab_ephys.sort import do_sorting_pipeline_concat
+
+
 def main():
 
-    deriv_folder = Path("/home/nolanlab/Work/components_results/ibl")
+    parser = ArgumentParser()
+    parser.add_argument('protocol')
+    protocol = parser.parse_args().protocol
 
-    recording_path = "/home/nolanlab/Downloads/sub-UCLA034_ses-3537d970-f515-4786-853f-23de525e110f_desc-raw_ecephys.nwb"
+    num = random.randint(0, 1000)
+
+    deriv_folder = Path("/exports/eddie/scratch/chalcrow/chris/derivatives")
+
+    recording_path = "/exports/eddie/scratch/chalcrow/chris/raw/sub-UCLA034_ses-3537d970-f515-4786-853f-23de525e110f_desc-raw_ecephys.nwb"
     recordings = [si.read_nwb_recording(recording_path, electrical_series_path='acquisition/ElectricalSeriesProbe00AP')]
 
-    protocols = ['lupinB', 'kilosort4B', 'spykingcircus2B', 'tridesclous2B']
+    analyzer_path = deriv_folder / f"ibl_{protocol}_analyzer_{num}"
 
-    for protocol in protocols:
-
-        analyzer_path = deriv_folder / f"ibl_{protocol}_analyzer"
-
-        do_sorting_pipeline_concat(
-            recordings,
-            analyzer_path,
-            protocol,
-            sorting_output_folder=f"sorting_output_{protocol}",
-            n_jobs=8,
-        )
+    do_sorting_pipeline_concat(
+        recordings,
+        analyzer_path,
+        protocol,
+        sorting_output_folder=f"sorting_output_{protocol}_{num}",
+        n_jobs=8,
+    )
 
 
 if __name__ == "__main__":
