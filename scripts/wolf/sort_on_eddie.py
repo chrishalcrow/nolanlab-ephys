@@ -40,10 +40,16 @@ if data_folder is None:
     data_folder = eddie_wolf_data_folder
 data_folder = Path(data_folder)
 
+if not data_folder.is_dir():
+    print(f"Given `data_folder` {data_folder} does not exist.")
+
 deriv_folder = parser.parse_args().deriv_folder
 if deriv_folder is None:
     deriv_folder = eddie_wolf_deriv_folder
 deriv_folder = Path(deriv_folder)
+
+if not deriv_folder.is_dir():
+    print(f"Given `deriv_folder` {deriv_folder} does not exist.")
 
 email = parser.parse_args().email
 if email is None:
@@ -51,7 +57,6 @@ if email is None:
 
 path_to_all_filepaths = "scripts/wolf/wolf_filepaths.csv"
 recording_paths = filepath_from_mouse_day_sessions(mouse, day, sessions=sessions, path_to_all_filepaths=path_to_all_filepaths)
-print(recording_paths)
 active_projects_path = eddie_active_projects
 
 stagein_dict = {}
