@@ -7,8 +7,11 @@ import pandas as pd
     
 parser = ArgumentParser()
 
-data_folder = Path()
-deriv_folder = Path()
+parser.add_argument('--data_folder', default=None)
+parser.add_argument('--deriv_folder', default=None)
+
+deriv_folder = parser.parse_args().deriv_folder
+data_folder = parser.parse_args().data_folder
 
 active_projects_path = eddie_active_projects
 test_folder = active_projects_path / "Wolf/mmnav/data/test"
