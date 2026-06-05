@@ -36,7 +36,7 @@ def main():
     for recording, analyzer_path in zip(recordings, analyzer_paths):
     
         do_sorting_pipeline_concat(
-            recording,
+            [recording],
             analyzer_path,
             protocol,
             sorting_output_folder=f"sorting_output_{analyzer_path.name}",
