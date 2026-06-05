@@ -64,10 +64,10 @@ for recording_path in recording_paths:
     recording_folder_name = Path(recording_path).name
     if "OF1" in recording_path:
         session_type_folder = data_folder / "OF"
-        stagein_dict[f"{active_projects_path / recording_path}"] = session_type_folder / recording_folder_name
+        stagein_dict[f"{active_projects_path / recording_path}"] = session_type_folder
     else:
         session_type_folder = data_folder / "VR"
-        stagein_dict[f"{active_projects_path / recording_path}"] = session_type_folder / recording_folder_name
+        stagein_dict[f"{active_projects_path / recording_path}"] = session_type_folder
     session_type_folder.mkdir(exist_ok=True)
 
 stageout_dict = {}
