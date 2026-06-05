@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 from pathlib import Path
 from nolanlab_ephys.lab_utils import get_recording_folders, chronologize_paths
 from nolanlab_ephys.sort import do_sorting_pipeline_concat
-from .test_data_eddie import recording_paths
+from test_data_eddie import recording_paths
 import spikeinterface.full as si
 
 def main():
