@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 from pathlib import Path
 from nolanlab_ephys.lab_utils import get_recording_folders, chronologize_paths
 from nolanlab_ephys.sort import do_sorting_pipeline_concat
-from test_data_eddie import recording_paths
+from test_data_eddie import folder_names
 import spikeinterface.full as si
 
 def main():
@@ -14,7 +14,12 @@ def main():
     parser.add_argument('--deriv_folder', default=None)
 
     deriv_folder = parser.parse_args().deriv_folder
+    deriv_folder = Path(deriv_folder)
+    
     data_folder = parser.parse_args().data_folder
+    data_folder = Path(data_folder)
+
+    recording_paths = [data_folder / folder_name for folder_name in folder_names]
     
     print(f"\nWill sort the following recordings:")
     for recording_path in recording_paths:

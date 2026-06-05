@@ -30,7 +30,7 @@ recording_paths = [
 stagein_dict = {}
 for recording_path in recording_paths:
     recording_folder_name = Path(recording_path).name
-    session_type_folder = data_folder / "VR"
+    session_type_folder = data_folder
     stagein_dict[f"{active_projects_path / recording_path}"] = session_type_folder / recording_folder_name
     session_type_folder.mkdir(exist_ok=True)
 
