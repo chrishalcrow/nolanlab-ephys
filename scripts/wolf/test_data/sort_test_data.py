@@ -10,16 +10,18 @@ def main():
 
     parser = ArgumentParser()
 
-    parser.add_argument('rec_index', type=int)
+    parser.add_argument('--rec_index', type=int, default=None)
     parser.add_argument('--data_folder', default=None)
     parser.add_argument('--deriv_folder', default=None)
 
-    rec_index = parser.parse_args().rec_index
+    parsed_args = parser.parse_args()
 
-    deriv_folder = parser.parse_args().deriv_folder
+    rec_index = parsed_args.rec_index
+
+    deriv_folder = parsed_args.deriv_folder
     deriv_folder = Path(deriv_folder)
     
-    data_folder = parser.parse_args().data_folder
+    data_folder = parsed_args.data_folder
     data_folder = Path(data_folder)
 
     recording_paths = [data_folder / folder_name for folder_name in folder_names][rec_index]

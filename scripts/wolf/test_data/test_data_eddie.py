@@ -95,6 +95,6 @@ for recording_index, recording_path in enumerate(recording_paths):
     stagein_job_name = f"test_in_{recording_index}" 
     run_python_name = f"test_run_{recording_index}"
     
-    python_arg = f"scripts/wolf/test_data/sort_test_data.py {recording_index} --data_folder={data_folder} --deriv_folder={deriv_folder}"
+    python_arg = f"scripts/wolf/test_data/sort_test_data.py --rec_index={recording_index} --data_folder={data_folder} --deriv_folder={deriv_folder}"
     run_stage_script(stagein_dict, job_name=stagein_job_name)
     run_python_script(uv_directory, python_arg, cores=4, email=email, staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
