@@ -10,8 +10,11 @@ def main():
 
     parser = ArgumentParser()
 
+    parser.add_argument('rec_index', type=int)
     parser.add_argument('--data_folder', default=None)
     parser.add_argument('--deriv_folder', default=None)
+
+    rec_index = parser.parse_args().rec_index
 
     deriv_folder = parser.parse_args().deriv_folder
     deriv_folder = Path(deriv_folder)
@@ -19,7 +22,7 @@ def main():
     data_folder = parser.parse_args().data_folder
     data_folder = Path(data_folder)
 
-    recording_paths = [data_folder / folder_name for folder_name in folder_names]
+    recording_paths = [data_folder / folder_name for folder_name in folder_names][rec_index]
     
     print(f"\nWill sort the following recordings:")
     for recording_path in recording_paths:
@@ -40,7 +43,7 @@ def main():
             analyzer_path,
             protocol,
             sorting_output_folder=f"sorting_output_{analyzer_path.name}",
-            n_jobs=8,
+            n_jobs=4,
         )
 
 
