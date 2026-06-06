@@ -79,17 +79,18 @@ recording_paths = [
     test_folder / folder_name for folder_name in folder_names
 ]
 
-stagein_dict = {}
-for recording_path in recording_paths:
+uv_directory = os.getcwd()
+email = "chalcrow@ed.ac.uk"
+
+
+for recording_index, recording_path in enumerate(recording_paths):
+
+    stagein_dict = {}
+
     recording_folder_name = Path(recording_path).name
     session_type_folder = data_folder
     stagein_dict[f"{active_projects_path / recording_path}"] = session_type_folder / recording_folder_name
     session_type_folder.mkdir(exist_ok=True)
-
-uv_directory = os.getcwd()
-email = "chalcrow@ed.ac.uk"
-
-for recording_index, recording_path in enumerate(recording_paths):
 
     stagein_job_name = f"test_in_{recording_index}" 
     run_python_name = f"test_run_{recording_index}"
