@@ -78,7 +78,7 @@ def main():
     data_folder = parsed_args.data_folder
     data_folder = Path(data_folder)
 
-    recording_paths = [data_folder / folder_name for folder_name in folder_names][rec_index]
+    recording_paths = [[data_folder / folder_name for folder_name in folder_names][rec_index]]
     
     print(f"\nWill sort the following recordings:")
     for recording_path in recording_paths:
