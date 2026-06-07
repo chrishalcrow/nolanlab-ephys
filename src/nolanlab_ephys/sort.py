@@ -66,7 +66,7 @@ def do_sorting_pipeline_concat_then_split(
 
     si.set_global_job_kwargs(n_jobs=n_jobs)
 
-    concatenated_recording = si.concatenate_recordings(recordings)
+    concatenated_recording = si.concatenate_recordings(recordings).split_by('group')
 
     preprocessing_pipeline = si.PreprocessingPipeline(protocol_info["preprocessing"])
     pp_recording = si.apply_preprocessing_pipeline(concatenated_recording, preprocessing_pipeline)
@@ -94,7 +94,7 @@ def do_sorting_pipeline_concat_then_split(
             protocol_info["preprocessing_for_analyzer"]
         )
         preprocessed_recording_for_analyzer = si.apply_preprocessing_pipeline(
-            recording, pipeline_for_analyzer
+            recording.split_by('group'), pipeline_for_analyzer
         )
 
         analyzer = si.create_sorting_analyzer(
@@ -165,7 +165,7 @@ def do_sorting_pipeline_concat(
 
     si.set_global_job_kwargs(n_jobs=n_jobs)
 
-    concatenated_recording = si.concatenate_recordings(recordings)
+    concatenated_recording = si.concatenate_recordings(recordings).split_by('group')
 
     pp_recording = si.apply_preprocessing_pipeline(
         concatenated_recording, protocol_info["preprocessing"]
