@@ -85,7 +85,7 @@ for folder_name in folder_names:
     
     bombcell_labels = si.bombcell_label_units(analyzer)['bombcell_label']
     good_units = (bombcell_labels == 'good').values
-    mua_units = (bombcell_labels == 'good').values
+    mua_units = (bombcell_labels == 'mua').values
     
     unit_locations =  analyzer.get_extension('unit_locations')
     
