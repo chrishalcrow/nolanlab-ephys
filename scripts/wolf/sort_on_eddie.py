@@ -4,6 +4,7 @@ from pathlib import Path
 from common_paths import  eddie_active_projects, eddie_wolf_data_folder, eddie_wolf_deriv_folder
 import os
 import pandas as pd
+import time
 
 def filepath_from_mouse_day_sessions(mouse, day, sessions, path_to_all_filepaths):
     
@@ -86,6 +87,7 @@ quality_arg = f"scripts/wolf/quality_controls.py {mouse} {day} {sessions_string}
 
 run_stage_script(stagein_dict, job_name=stagein_job_name)
 run_python_script(uv_directory, python_arg, cores=8, email=email, staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
+time.sleep(2)
 # Do quality control
 run_python_script(uv_directory, python_arg, cores=8, email=email, staging=False, hold_jid=stagein_job_name, job_name=quality_name)
 run_stage_script(stageout_dict, job_name=stageout_job_name, hold_jid=run_python_name)
