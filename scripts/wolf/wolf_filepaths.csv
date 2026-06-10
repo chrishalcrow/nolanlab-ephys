@@ -119,3 +119,7 @@ mouse,day,session,filepath
 8,4,MMNAV,Wolf/mmnav/data/raw/VR/M08_D04_2026-06-09_14-31-17_MMNAV
 9,4,MMNAV,Wolf/mmnav/data/raw/VR/M09_D04_2026-06-09_15-18-46_MMNAV
 10,4,MMNAV,Wolf/mmnav/data/raw/VR/M10_D04_2026-06-09_16-04-15_MMNAV
+7,5,MMNAV,Wolf/mmnav/data/raw/VR/M07_D05_2026-06-10_13-56-05_MMNAV
+8,5,MMNAV,Wolf/mmnav/data/raw/VR/M08_D05_2026-06-10_14-52-39_MMNAV
+9,5,MMNAV,Wolf/mmnav/data/raw/VR/M09_D05_2026-06-10_16-07-27_MMNAV
+10,5,MMNAV,Wolf/mmnav/data/raw/VR/M10_D05_2026-06-10_17-03-46_MMNAV

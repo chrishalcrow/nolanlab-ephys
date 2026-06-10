@@ -83,11 +83,11 @@ stageout_job_name = f"M{mouse}D{day}{sessions[0][:2]}out"
 
 uv_directory = os.getcwd()
 python_arg = f"scripts/wolf/sort_on_comp.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
-quality_arg = f"scripts/wolf/quality_controls.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
+quality_arg = f"scripts/wolf/quality_control.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
 
 run_stage_script(stagein_dict, job_name=stagein_job_name)
 run_python_script(uv_directory, python_arg, cores=8, email=email, staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
 time.sleep(2)
 # Do quality control
-run_python_script(uv_directory, python_arg, cores=8, email=email, staging=False, hold_jid=stagein_job_name, job_name=quality_name)
+run_python_script(uv_directory, quality_arg, cores=8, email=email, staging=False, hold_jid=stagein_job_name, job_name=quality_name)
 run_stage_script(stageout_dict, job_name=stageout_job_name, hold_jid=run_python_name)

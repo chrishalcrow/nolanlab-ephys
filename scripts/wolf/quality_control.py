@@ -72,7 +72,7 @@ def main():
     if not deriv_folder.is_dir():
         raise FileNotFoundError(f"`deriv_folder` {deriv_folder} does not exist, or is not mounted.")
 
-    mouseday_deriv_folder = deriv_folder / f"M{mouse}/D{day}"
+    mouseday_deriv_folder = deriv_folder / f"M{mouse_string}/D{day_string}"
 
     if not mouseday_deriv_folder.is_dir():
         raise FileNotFoundError(
