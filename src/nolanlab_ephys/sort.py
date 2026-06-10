@@ -66,10 +66,11 @@ def do_sorting_pipeline_concat_then_split(
 
     si.set_global_job_kwargs(n_jobs=n_jobs)
 
-    concatenated_recording = si.concatenate_recordings(recordings).split_by('group')
+    concatenated_recording = si.concatenate_recordings(recordings)
+    grouped_recording = concatenated_recording.split_by('group')
 
     preprocessing_pipeline = si.PreprocessingPipeline(protocol_info["preprocessing"])
-    pp_recording = si.apply_preprocessing_pipeline(concatenated_recording, preprocessing_pipeline)
+    pp_recording = si.apply_preprocessing_pipeline(grouped_recording, preprocessing_pipeline)
     sorting = si.run_sorter(
         recording=pp_recording,
         **protocol_info["sorting"],
