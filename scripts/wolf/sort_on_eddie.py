@@ -73,33 +73,32 @@ for mouse in mice:
         
         stagein_dict = {}
         for recording_path in recording_paths:
-        recording_folder_name = Path(recording_path).name
-        if "OF1" in recording_path:
-            session_type_folder = data_folder / "OF"
-            stagein_dict[f"{active_projects_path / recording_path}"] = session_type_folder
-        else:
-            session_type_folder = data_folder / "VR"
-            stagein_dict[f"{active_projects_path / recording_path}"] = session_type_folder
-        session_type_folder.mkdir(exist_ok=True)
+            recording_folder_name = Path(recording_path).name
+            if "OF1" in recording_path:
+                session_type_folder = data_folder / "OF"
+                stagein_dict[f"{active_projects_path / recording_path}"] = session_type_folder
+            else:
+                session_type_folder = data_folder / "VR"
+                stagein_dict[f"{active_projects_path / recording_path}"] = session_type_folder
+            session_type_folder.mkdir(exist_ok=True)
         
         stageout_dict = {}
         for session in sessions:
-
             stageout_dict[deriv_folder / f"M{mouse:02d}/D{day:02d}/{session}/{protocol}"] = eddie_active_projects / "Wolf/MMNAV/derivatives" / f"M{mouse:02d}/D{day:02d}/{session}/"
             stageout_dict[deriv_folder / f"M{mouse:02d}/D{day:02d}/M{mouse:02d}_D{day:02d}_probe_layout.png"] = eddie_active_projects / "Wolf/MMNAV/derivatives" / f"M{mouse:02d}/D{day:02d}/"
-            
-            stagein_job_name = f"M{mouse}D{day}{sessions[0][:2]}in" 
-            run_python_name = f"M{mouse}D{day}{sessions[0][:2]}run"
-            quality_name = f"M{mouse}D{day}quality"
-            stageout_job_name = f"M{mouse}D{day}{sessions[0][:2]}out" 
-            
-            uv_directory = os.getcwd()
-            python_arg = f"scripts/wolf/sort_on_comp.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
-            quality_arg = f"scripts/wolf/quality_control.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
-            
-            run_stage_script(stagein_dict, job_name=stagein_job_name)
-            run_python_script(uv_directory, python_arg, cores=8, email=email, staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
-            time.sleep(2)
-            # Do quality control
-            run_python_script(uv_directory, quality_arg, cores=8, email=email, staging=False, hold_jid=stagein_job_name, job_name=quality_name)
-            run_stage_script(stageout_dict, job_name=stageout_job_name, hold_jid=run_python_name)
+        
+        stagein_job_name = f"M{mouse}D{day}{sessions[0][:2]}in" 
+        run_python_name = f"M{mouse}D{day}{sessions[0][:2]}run"
+        quality_name = f"M{mouse}D{day}quality"
+        stageout_job_name = f"M{mouse}D{day}{sessions[0][:2]}out" 
+        
+        uv_directory = os.getcwd()
+        python_arg = f"scripts/wolf/sort_on_comp.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
+        quality_arg = f"scripts/wolf/quality_control.py {mouse} {day} {sessions_string} {protocol} --data_folder={data_folder} --deriv_folder={deriv_folder}"
+        
+        run_stage_script(stagein_dict, job_name=stagein_job_name)
+        run_python_script(uv_directory, python_arg, cores=8, email=email, staging=False, hold_jid=stagein_job_name, job_name=run_python_name)
+        time.sleep(2)
+        # Do quality control
+        run_python_script(uv_directory, quality_arg, cores=8, email=email, staging=False, hold_jid=stagein_job_name, job_name=quality_name)
+        run_stage_script(stageout_dict, job_name=stageout_job_name, hold_jid=run_python_name)
