@@ -9,15 +9,21 @@ def main():
 
     parser = ArgumentParser()
 
-    parser.add_argument('mouse')
-    parser.add_argument('day')
+    parser.add_argument('mice')
+    parser.add_argument('days')
     parser.add_argument('sessions')
     parser.add_argument('protocols')
     parser.add_argument('--data_folder', default=None)
     parser.add_argument('--deriv_folder', default=None)
 
-    mouse = int(parser.parse_args().mouse)
-    day = int(parser.parse_args().day)
+    mice_string = parser.parse_args().mice
+    days_string = parser.parse_args().days
+
+    mice = mice_string.split(',')
+    mice = [int(mouse) for mouse in mice]
+
+    days = days_string.split(',')
+    days = [int(day) for day in days]
 
     sessions_string = parser.parse_args().sessions
     sessions = sessions_string.split(',')
@@ -35,32 +41,35 @@ def main():
         deriv_folder = "/home/nolanlab/Work/Harry_Project/derivatives/"
     deriv_folder = Path(deriv_folder)
 
-    mouseday_deriv_folder = deriv_folder / f"M{mouse:02d}/D{day:02d}"
-    mouseday_deriv_folder.mkdir(parents=True, exist_ok=True)
-
-    recording_paths = chronologize_paths(
-        get_recording_folders(data_folder=data_folder, mouse=mouse, day=day, sessions=sessions)
-    )
-    print(f"\nWill sort the following recordings:")
-    for recording_path in recording_paths:
-        print(f"  - {recording_path}")
-
-    recordings = [si.read_openephys(recording_path) for recording_path in recording_paths]
-
-    for protocol in protocols_list:
-
-        analyzer_paths = [
-            mouseday_deriv_folder / f"{session}/{protocol}/sub-{mouse:02d}_day-{day:02d}_ses-{session}_srt-{protocol}_analyzer"
-            for session in sessions
-        ]
-
-        do_sorting_pipeline_concat_then_split(
-            recordings,
-            analyzer_paths,
-            protocol,
-            sorting_output_folder=f"sorting_output_{mouse}_{day}_{protocol}",
-            n_jobs=8,
-        )
+    for mouse in mice:
+        for day in days:
+        
+            mouseday_deriv_folder = deriv_folder / f"M{mouse:02d}/D{day:02d}"
+            mouseday_deriv_folder.mkdir(parents=True, exist_ok=True)
+        
+            recording_paths = chronologize_paths(
+                get_recording_folders(data_folder=data_folder, mouse=mouse, day=day, sessions=sessions)
+            )
+            print(f"\nWill sort the following recordings:")
+            for recording_path in recording_paths:
+                print(f"  - {recording_path}")
+        
+            recordings = [si.read_openephys(recording_path) for recording_path in recording_paths]
+        
+            for protocol in protocols_list:
+        
+                analyzer_paths = [
+                    mouseday_deriv_folder / f"{session}/{protocol}/sub-{mouse:02d}_day-{day:02d}_ses-{session}_srt-{protocol}_analyzer"
+                    for session in sessions
+                ]
+        
+                do_sorting_pipeline_concat_then_split(
+                    recordings,
+                    analyzer_paths,
+                    protocol,
+                    sorting_output_folder=f"sorting_output_{mouse}_{day}_{protocol}",
+                    n_jobs=8,
+                )
 
 
 if __name__ == "__main__":
