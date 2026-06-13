@@ -86,7 +86,7 @@ def main():
     analyzer_paths = [
         deriv_folder
         / mouseday_deriv_folder
-        / f"{session}/{protocol}/sub-{mouse_string}_day-{day_string}_ses-{session}_srt-{protocol}_analyzer.zarr"
+        / f"{session}/{protocol}/sub-{mouse_string}_day-{day_string}_ses-{session}_srt-{protocol}_analyzer"
         for session in sessions
     ]
 
