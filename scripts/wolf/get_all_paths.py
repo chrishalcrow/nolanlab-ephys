@@ -7,7 +7,7 @@ parser.add_argument('--data_folder', default=None)
 
 data_folder = parser.parse_args().data_folder
 if data_folder is None:
-    data_folder = "/Volumes/cmvm/sbms/groups/CDBS_SIDB_storage/NolanLab/ActiveProjects/Wolf/mmnav/data/raw"
+    data_folder = "/Volumes/cmvm/sbms/groups/INCR-NolanLab/ActiveProjects/Wolf/mmnav/data/raw"
 data_folder = Path(data_folder)
 
 session_types = ['OF', 'VR']
