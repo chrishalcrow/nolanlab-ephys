@@ -2,18 +2,21 @@ mouse,day,session,filepath
 10,13,OF,Wolf/mmnav/data/raw/OF/M10_D13_2026-06-19_17-46-45_OF
 7,12,OF,Wolf/mmnav/data/raw/OF/M07_D12_2026-06-18_13-48-57_OF
 9,13,OF,Wolf/mmnav/data/raw/OF/M09_D13_2026-06-19_15-38-24_OF
+9,22,OF,Wolf/mmnav/data/raw/OF/M09_D22_2026-06-29_15-20-25_OF
 8,18,OF,Wolf/mmnav/data/raw/OF/M08_D18_2026-06-25_14-26-08_OF
 5,8,OF1,Wolf/mmnav/data/raw/OF/M05_D08_2025-11-20_16-39-45_OF1
 9,17,OF,Wolf/mmnav/data/raw/OF/M09_D17_2026-06-24_15-42-10_OF
 10,17,OF,Wolf/mmnav/data/raw/OF/M10_D17_2026-06-24_16-59-05_OF
 5,5,OF1,Wolf/mmnav/data/raw/OF/M05_D05_2025-11-17_16-41-09_OF1
 7,18,OF,Wolf/mmnav/data/raw/OF/M07_D18_2026-06-25_12-57-30_OF
+10,22,OF,Wolf/mmnav/data/raw/OF/M10_D22_2026-06-29_16-26-28_OF
 9,12,OF,Wolf/mmnav/data/raw/OF/M09_D12_2026-06-18_16-17-09_OF
 8,20,OF,Wolf/mmnav/data/raw/OF/M08_D20_2026-06-27_14-23-38_OF
 9,16,OF,Wolf/mmnav/data/raw/OF/M09_D16_2026-06-23_14-49-59_OF
 9,21,OF,Wolf/mmnav/data/raw/OF/M09_D21_2026-06-28_15-10-45_OF
 10,20,OF,Wolf/mmnav/data/raw/OF/M10_D20_2026-06-27_17-01-04_OF
 10,21,OF,Wolf/mmnav/data/raw/OF/M10_D21_2026-06-28_16-25-17_OF
+8,22,OF,Wolf/mmnav/data/raw/OF/M08_D22_2026-06-29_14-03-06_OF
 9,18,OF,Wolf/mmnav/data/raw/OF/M09_D18_2026-06-25_15-42-43_OF
 7,21,OF,Wolf/mmnav/data/raw/OF/M07_D21_2026-06-28_12-34-19_OF
 4,5,OF1,Wolf/mmnav/data/raw/OF/M04_D05_2025-11-17_15-01-17_OF1
@@ -35,8 +38,10 @@ mouse,day,session,filepath
 8,19,OF,Wolf/mmnav/data/raw/OF/M08_D19_2026-06-26_13-43-46_OF
 7,13,OF,Wolf/mmnav/data/raw/OF/M07_D13_2026-06-19_12-58-42_OF
 7,16,OF,Wolf/mmnav/data/raw/OF/M07_D16_2026-06-23_12-02-54_OF
+7,22,OF,Wolf/mmnav/data/raw/OF/M07_D22_2026-06-29_12-37-57_OF
 3,21,MMNAVGPI,Wolf/mmnav/data/raw/VR/M03_D21_2025-12-02_12-41-08_MMNAVGPI
 10,5,MMNAV,Wolf/mmnav/data/raw/VR/M10_D05_2026-06-10_17-03-46_MMNAV
+10,22,MMNAV,Wolf/mmnav/data/raw/VR/M10_D22_2026-06-29_16-50-29_MMNAV
 7,6,MMNAV,Wolf/mmnav/data/raw/VR/M07_D06_2026-06-11_13-51-51_MMNAV
 6,7,MMNAV2,Wolf/mmnav/data/raw/VR/M06_D07_2025-11-19_16-00-00_MMNAV2
 9,6,MMNAV,Wolf/mmnav/data/raw/VR/M09_D06_2026-06-11_15-28-46_MMNAV
@@ -159,6 +164,7 @@ mouse,day,session,filepath
 5,17,MMNAVGPI,Wolf/mmnav/data/raw/VR/M05_D17_2025-11-29_17-12-37_MMNAVGPI
 5,4,MMNAV1,Wolf/mmnav/data/raw/VR/M05_D04_2025-11-16_14-46-40_MMNAV1
 8,10,MMNAV,Wolf/mmnav/data/raw/VR/M08_D10_2026-06-15_12-49-58_MMNAV
+8,22,MMNAV,Wolf/mmnav/data/raw/VR/M08_D22_2026-06-29_14-30-02_MMNAV
 5,8,MMNAV2,Wolf/mmnav/data/raw/VR/M05_D08_2025-11-20_17-50-24_MMNAV2
 9,18,MMNAV,Wolf/mmnav/data/raw/VR/M09_D18_2026-06-25_16-06-47_MMNAV
 6,17,MMNAVGPI,Wolf/mmnav/data/raw/VR/M06_D17_2025-11-29_16-00-00_MMNAVGPI
@@ -167,6 +173,7 @@ mouse,day,session,filepath
 8,5,MMNAV,Wolf/mmnav/data/raw/VR/M08_D05_2026-06-10_14-52-39_MMNAV
 2,6,MMNAV2,Wolf/mmnav/data/raw/VR/M02_D06_2025-11-17_13-30-00_MMNAV2
 5,6,MMNAV2,Wolf/mmnav/data/raw/VR/M05_D06_2025-11-18_15-55-27_MMNAV2
+9,22,MMNAV,Wolf/mmnav/data/raw/VR/M09_D22_2026-06-29_15-45-02_MMNAV
 2,22,MMNAVGPI,Wolf/mmnav/data/raw/VR/M02_D22_2025-12-03_13-00-00_MMNAVGPI
 6,6,MMNAV2,Wolf/mmnav/data/raw/VR/M06_D06_2025-11-18_16-50-00_MMNAV2
 4,3,MMNAV1,Wolf/mmnav/data/raw/VR/M04_D03_2025-11-15_14-31-14_MMNAV1
@@ -206,6 +213,7 @@ mouse,day,session,filepath
 7,3,MMNAV,Wolf/mmnav/data/raw/VR/M07_D03_2026-06-08_14-01-09_MMNAV
 10,9,MMNAV,Wolf/mmnav/data/raw/VR/M10_D09_2026-06-14_16-00-52_MMNAV
 9,14,MMNAV,Wolf/mmnav/data/raw/VR/M09_D14_2026-06-20_15-28-30_MMNAV
+7,22,MMNAV,Wolf/mmnav/data/raw/VR/M07_D22_2026-06-29_13-09-58_MMNAV
 7,11,MMNAV,Wolf/mmnav/data/raw/VR/M07_D11_2026-06-16_10-00-41_MMNAV
 6,1,MMNAV1,Wolf/mmnav/data/raw/VR/M06_D01_2025-11-13_16-40-00_MMNAV1
 9,8,MMNAV,Wolf/mmnav/data/raw/VR/M09_D08_2026-06-13_15-06-58_MMNAV
